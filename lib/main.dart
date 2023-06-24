@@ -53,6 +53,7 @@ class _MyAppState extends State<MyApp> {
           
           appBar: AppBar(
             title: Text("Cek Ongkir"),
+            backgroundColor: Color.fromRGBO(255, 23, 68, 1),
           ),
           bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
@@ -63,11 +64,14 @@ class _MyAppState extends State<MyApp> {
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[
           NavigationDestination(
-            icon: Icon(Icons.local_shipping),
+            icon: Icon(Icons.local_shipping,
+            color:Color.fromRGBO(255, 23, 68, 1),),
             label: 'Cek Ongkir',
           ),
           NavigationDestination(
-            icon: Icon(Icons.list),
+            icon: Icon(Icons.list,
+            color:Color.fromRGBO(255, 23, 68, 1),
+            ),
             label: 'Lainnya',
           ),
         ],
@@ -221,10 +225,22 @@ class _MyAppState extends State<MyApp> {
           ),
           // Lainnya
           Column(children: [
-            Text("Daftar Ekspedisi"),
-            Text("Hapus riwayat cek resi"),
-            Text("Bagikan Aplikasi"),
-            
+            Container(
+    color: Color.fromRGBO(255, 23, 68, 1),
+    height: 150,
+  ),
+            Card(
+            child: ListTile(
+              leading: Icon(Icons.list),
+              title: Text('Daftar Ekspedisi'),
+            ),
+          ),
+            Card(
+            child: ListTile(
+              leading: Icon(Icons.mail),
+              title: Text('Kontak kami'),
+            ),
+          ),              
           ],)
           ][currentPageIndex] ,
         );
