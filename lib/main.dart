@@ -72,7 +72,8 @@ class _MyAppState extends State<MyApp> {
           ),
         ],
       ),
-          body: Container(
+          body: <Widget>[
+            Container(
             padding: EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -218,6 +219,10 @@ class _MyAppState extends State<MyApp> {
               ],
             ),
           ),
+          Column(children: [
+            
+          ],)
+          ][currentPageIndex] ,
         );
       }
     }
