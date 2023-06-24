@@ -219,7 +219,11 @@ class _MyAppState extends State<MyApp> {
               ],
             ),
           ),
+          // Lainnya
           Column(children: [
+            Text("Daftar Ekspedisi"),
+            Text("Hapus riwayat cek resi"),
+            Text("Bagikan Aplikasi"),
             
           ],)
           ][currentPageIndex] ,
