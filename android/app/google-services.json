@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "698169034813",
+    "firebase_url": "https://uas-softdev-default-rtdb.firebaseio.com",
+    "project_id": "uas-softdev",
+    "storage_bucket": "uas-softdev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:698169034813:android:dd2f5d2e989d6fa71a0254",
+        "android_client_info": {
+          "package_name": "com.example.cekongkir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "698169034813-1hhmhuel8gm363mv7u6v1v8t511a1v8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFllKKtkLLSfqLDfdxOkNqlLM2avnFxNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "698169034813-1hhmhuel8gm363mv7u6v1v8t511a1v8f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "698169034813-g85ruam9a54l7hqcklt79aruabu51nct.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cekongkir.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
