@@ -27,11 +27,11 @@ class MyApp extends StatelessWidget {
       // Definisikan rute
       routes: {
         '/': (context) => const HomePage(),
-        '/detail': (context) => const DetailPage(),
+        '/detail': (context) => const MyApp(),
         '/signup': (context) => const SignUpPage(),
         '/login': (context) => const LoginPage(),
       },
-      initialRoute: '/signup',
+      initialRoute: '/',
     );
   }
 }
