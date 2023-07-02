@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cekongkir/cek_ongkir/loginscreen.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -33,14 +34,14 @@ class _SignUpPage extends State<SignUpPage> {
 
     // Setelah berhasil menambahkan data, Anda dapat melakukan navigasi ke halaman berikutnya
     // Misalnya, menggunakan Navigator.push untuk berpindah ke halaman utama aplikasi
-    // Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Signup'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -62,7 +63,7 @@ class _SignUpPage extends State<SignUpPage> {
             ),
             ElevatedButton(
               onPressed: loginUser,
-              child: const Text('Login'),
+              child: const Text('Signup'),
             ),
           ],
         ),

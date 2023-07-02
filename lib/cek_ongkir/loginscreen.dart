@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cekongkir/cek_ongkir/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
         print('Login successful');
         // Lakukan navigasi ke halaman berikutnya setelah login berhasil
         // Misalnya, menggunakan Navigator.push untuk berpindah ke halaman utama aplikasi
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
       } else {
         print('Invalid credentials');
         // Tampilkan pesan kesalahan atau tindakan yang sesuai untuk login gagal
