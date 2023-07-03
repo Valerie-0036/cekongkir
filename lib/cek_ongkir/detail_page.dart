@@ -4,8 +4,10 @@ class DetailPage extends StatelessWidget {
   final String? kotaAsal;
   final String? kotaTujuan;
   final String? berat;
+  final int? jarakAsal;
+  final int? jarakTujuan;
 
-  const DetailPage({Key? key,  this.kotaAsal,  this.kotaTujuan, this.berat}) : super(key: key);
+  const DetailPage({Key? key,  this.kotaAsal,  this.kotaTujuan, this.berat, this.jarakAsal, this.jarakTujuan}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +16,15 @@ class DetailPage extends StatelessWidget {
     String? kotaAsalValue = kotaAsal;
     String? kotaTujuanValue = kotaTujuan;
     String? beratBarangValue = berat;
+    int? jarakAsalValue = jarakAsal;
+    int? jarakTujuanValue = jarakTujuan;
 
     if (arguments != null) {
       kotaAsalValue = arguments['kota_asal'];
       kotaTujuanValue = arguments['kota_tujuan'];
       beratBarangValue = arguments['berat'];
+      jarakAsalValue = arguments['jarakAsal'];
+      jarakTujuanValue = arguments['jarakTujuan'];
     }
 
     return Scaffold(
@@ -53,6 +59,10 @@ class DetailPage extends StatelessWidget {
                   const SizedBox(height: 10.0,),
                   Text("Berat"),
                   Text("${beratBarangValue ?? 'Unknown'}"
+                  ,style:TextStyle(fontWeight:FontWeight.bold),),
+                  const SizedBox(height: 10.0,),
+                  Text("Jarak"),
+                  Text("${jarakTujuanValue ?? 'Unknown'}"
                   ,style:TextStyle(fontWeight:FontWeight.bold),),
                   const SizedBox(height: 10.0,),
                 ],
