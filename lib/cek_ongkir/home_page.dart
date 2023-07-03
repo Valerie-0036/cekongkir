@@ -59,8 +59,10 @@ class _HomeState extends State<HomePage> {
             .get();
 
         if (querySnapshot.docs.isNotEmpty) {
+          
           var doc = querySnapshot.docs.first;
           print('Layanan untuk kurir $kurir ditemukan dalam ekspedisi ${doc.id}');
+          print(doc);
         } else {
           print('Daftar Kurir tidak ditemukan.');
         }
