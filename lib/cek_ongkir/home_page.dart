@@ -393,7 +393,7 @@ class _HomePageState extends State<HomePage> {
                     // proses saving data
                     calculateDistance();
                     print('Apaa');
-                    print(listLayananPerKm);
+                    print(listLayananPerKm.length);
 
                     // Navigasi ke halaman detail dengan membawa data yang diperlukan
                     Navigator.pushNamed(

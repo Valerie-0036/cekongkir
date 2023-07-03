@@ -30,6 +30,12 @@ class DetailPage extends StatelessWidget {
     final List<Map<String, dynamic>> listLayananPerKm = arguments['listLayananPerkm'];
     String namaLayanan = listLayananPerKm[0]['layanan'];
     int kmLayanan = listLayananPerKm[0]['per_km'];
+    for (int i = 0; i < listLayananPerKm.length; i++) {
+  String namaLayanan = listLayananPerKm[i]['layanan'];
+  int kmLayanan = listLayananPerKm[i]['per_km'];
+  print('Layanan: $namaLayanan, Per Km: $kmLayanan');
+}
+
     print(listLayananPerKm.length);
     print(namaLayanan);
     print(kmLayanan);
