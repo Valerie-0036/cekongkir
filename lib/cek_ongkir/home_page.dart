@@ -375,60 +375,55 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
 
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 5.0),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 255, 23, 68),
-                      ),
-                      onPressed: () {
-                        // validasi
-                        if (kota_asal == null ||
-                            kota_tujuan == null ||
-                            berat == null ||
-                            kurir == null) {
-                          final snackBar =
-                              SnackBar(content: const Text("Isi bidang yang masih kosong"));
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          return;
-                        }
-                        // proses saving data
-                        calculateDistance();
-                        
-                        print('Iniii');
-                        print(listLayananPerKm);
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 5.0),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 255, 23, 68),
+                  ),
+                  onPressed: () {
+                    // validasi
+                    if (kota_asal == null ||
+                        kota_tujuan == null ||
+                        berat == null ||
+                        kurir == null) {
+                      final snackBar =
+                          SnackBar(content: const Text("Isi bidang yang masih kosong"));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      return;
+                    }
+                    // proses saving data
+                    calculateDistance();
+                    print('Apaa');
+                    print(listLayananPerKm);
 
-                        // Navigasi ke halaman detail dengan membawa data yang diperlukan
-                          // void function() async{
-                          //   await
-                            Navigator.pushNamed(
-                          context,
-                          '/detail',
-                          arguments: {
-                            'kota_asal': kota_asal,
-                            'kota_tujuan': kota_tujuan,
-                            'berat': berat,
-                            'kurir': kurir,
-                            'jarakAsal': jarakAsal,
-                            'jarakTujuan': jarakTujuan,
-                            'layanan': layanan,
-                            'per_km': per_km,
-                            'ekspedisi' : ekspedisi,
-                            'listlayananPerkm' : listLayananPerKm,
-                          },
-                        ).then((_) => setState(() =>  listLayananPerKm.clear()));
-                        
+                    // Navigasi ke halaman detail dengan membawa data yang diperlukan
+                    Navigator.pushNamed(
+                      context,
+                      '/detail',
+                      arguments: {
+                        'kota_asal': kota_asal,
+                        'kota_tujuan': kota_tujuan,
+                        'berat': berat,
+                        'kurir': kurir,
+                        'jarakAsal': jarakAsal,
+                        'jarakTujuan': jarakTujuan,
+                        'layanan': layanan,
+                        'per_km': per_km,
+                        'ekspedisi' : ekspedisi,
+                        'listLayananPerkm' : listLayananPerKm,
                       },
-                      child: const Text('CEK'),
-                    ),
-                  ],
+                    );
+                  },
+                  child: const Text('CEK'),
                 ),
               ],
             ),
-          ),
-              ),
+          ],
+        ),
+      ),
     );
   }
 }

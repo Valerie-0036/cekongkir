@@ -1,3 +1,4 @@
+import 'package:cekongkir/cek_ongkir/det.dart';
 import 'package:cekongkir/cek_ongkir/loginscreen.dart';
 import 'package:cekongkir/cek_ongkir/signup_screen.dart';
 import 'package:cekongkir/firebase_options.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => SignUpScreen(),
         '/login': (context) => LoginScreen(),
         '/homebar': (context) => HomeBar(),
+        '/detail1' : (context) => DetailPage1(),
       },
       initialRoute: '/homebar',
     );
