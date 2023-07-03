@@ -70,7 +70,9 @@ class DetailPage extends StatelessWidget {
                             children: [
                               Text("ECO",),
                               Spacer(),
-                              Text("Rp 16.000"),
+                              Text("Rp 16.000",style: TextStyle(
+                                color: Color.fromARGB(255, 255, 23, 68),
+                              ) ,),
                               const SizedBox(width: 20.0,),        
                             ],
                           ),
@@ -79,7 +81,9 @@ class DetailPage extends StatelessWidget {
                             children: [
                               Text("ECO",),
                               Spacer(),
-                              Text("Rp 16.000"),
+                              Text("Rp 16.000",style: TextStyle(
+                                color: Color.fromARGB(255, 255, 23, 68),
+                              ) ,),
                               const SizedBox(width: 20.0,),        
                             ],
                           ),
@@ -96,7 +100,9 @@ class DetailPage extends StatelessWidget {
                             children: [
                               Text("ECO",),
                               Spacer(),
-                              Text("Rp 16.000"),
+                              Text("Rp 16.000",style: TextStyle(
+                                color: Color.fromARGB(255, 255, 23, 68),
+                              ) ,),
                               const SizedBox(width: 20.0,),        
                             ],
                           ),
@@ -105,7 +111,9 @@ class DetailPage extends StatelessWidget {
                             children: [
                               Text("ECO",),
                               Spacer(),
-                              Text("Rp 16.000"),
+                              Text("Rp 16.000",style: TextStyle(
+                                color: Color.fromARGB(255, 255, 23, 68),
+                              ) ,),
                               const SizedBox(width: 20.0,),        
                             ],
                           ),
