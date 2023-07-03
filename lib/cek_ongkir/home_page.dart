@@ -392,7 +392,7 @@ class _HomePageState extends State<HomePage> {
                     }
                     // proses saving data
                     calculateDistance();
-                    print('Iniii');
+                    print('Apaa');
                     print(listLayananPerKm);
 
                     // Navigasi ke halaman detail dengan membawa data yang diperlukan
@@ -409,7 +409,7 @@ class _HomePageState extends State<HomePage> {
                         'layanan': layanan,
                         'per_km': per_km,
                         'ekspedisi' : ekspedisi,
-                        'listlayananPerkm' : listLayananPerKm,
+                        'listLayananPerkm' : listLayananPerKm,
                       },
                     );
                   },
