@@ -147,9 +147,17 @@ class _HomeState extends State<HomePage> {
                 });
               },
               items: <String>[
-                'JNE',
-                'POS Indonesia',
-                'TIKI',
+                'sicepatexp',
+                'jne',
+                'j&t',
+                'wahana',
+                'satria',
+                'lionparcel',
+                'tiki',
+                'pos',
+                'anteraja',
+                'ninja',
+                'idexpress',
               ].map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
