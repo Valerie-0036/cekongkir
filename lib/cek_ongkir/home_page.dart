@@ -16,6 +16,9 @@ class _HomeState extends State<HomePage> {
 
   CollectionReference provinsiCollection =
       FirebaseFirestore.instance.collection('provinsi');
+  CollectionReference ekspedisiCollection =
+      FirebaseFirestore.instance.collection('ekspedisi');
+  
   
   void checkEkspedisiFields() async {
     // Cek apakah data provinsi asal dan tujuan sudah dipilih
@@ -50,7 +53,21 @@ class _HomeState extends State<HomePage> {
         } else {
           print('Provinsi Tujuan tidak ditemukan.');
         }
-      } catch (e) {
+
+        querySnapshot = await ekspedisiCollection
+            .where('ekspedisi', isEqualTo: kurir)
+            .get();
+
+        if (querySnapshot.docs.isNotEmpty) {
+          
+          var doc = querySnapshot.docs.first;
+          print('Layanan untuk kurir $kurir ditemukan dalam ekspedisi ${doc.id}');
+          print(doc);
+        } else {
+          print('Daftar Kurir tidak ditemukan.');
+        }
+      }
+      catch (e) {
         print('Terjadi kesalahan: $e');
       }
     }
