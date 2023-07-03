@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class DetailPage extends StatelessWidget {
   final String? kotaAsal;
   final String? kotaTujuan;
+  final int? beratBarang;
 
-  const DetailPage({Key? key,  this.kotaAsal,  this.kotaTujuan}) : super(key: key);
+  const DetailPage({Key? key,  this.kotaAsal,  this.kotaTujuan, this.beratBarang}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +13,11 @@ class DetailPage extends StatelessWidget {
 
     String? kotaAsalValue = kotaAsal;
     String? kotaTujuanValue = kotaTujuan;
-
+    int? beratBarangValue = beratBarang;
     if (arguments != null) {
       kotaAsalValue = arguments['kota_asal'];
       kotaTujuanValue = arguments['kota_tujuan'];
+      beratBarangValue = arguments['berat_barang'];
     }
 
     return Scaffold(
@@ -24,7 +26,8 @@ class DetailPage extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 255, 23, 68),
         
       ),
-      body: Center(
+      body: SingleChildScrollView(
+        
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -33,8 +36,7 @@ class DetailPage extends StatelessWidget {
             children: [
               
             Container(
-              
-              color: Color.fromARGB(255, 202, 202, 202),
+
               child:   Column(
                           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -44,24 +46,25 @@ class DetailPage extends StatelessWidget {
                   Text("${kotaAsalValue ?? 'Unknown'}"
                   ,style:TextStyle(fontWeight:FontWeight.bold),),
                   const SizedBox(height: 10.0,),
-                  Text("Tujuan Pengiriman: ${kotaTujuanValue ?? 'Unknown'}"),
+                  Text("Tujuan Pengiriman"),
                   Text("${kotaTujuanValue ?? 'Unknown'}"
+                  ,style:TextStyle(fontWeight:FontWeight.bold),),
+                  const SizedBox(height: 10.0,),
+                  Text("Berat"),
+                  Text("${beratBarang ?? 'Unknown'}"
                   ,style:TextStyle(fontWeight:FontWeight.bold),),
                   const SizedBox(height: 10.0,),
                 ],
               ),
             ),
               // Add other necessary UI elements
-        
-              Container(
-                child:
+            _buildDivider(),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-
-
                   children: [
+                    // Tiki
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
+                    
                     children: [
                         const SizedBox(height: 20.0,),
                       Text("TIKI", style: TextStyle(fontWeight:FontWeight.bold),),
@@ -71,7 +74,7 @@ class DetailPage extends StatelessWidget {
                               Text("ECO",),
                               Spacer(),
                               Text("Rp 16.000",style: TextStyle(
-                                color: Color.fromARGB(255, 255, 23, 68),
+                                color: Color.fromARGB(255, 255, 23, 68),fontWeight:FontWeight.bold,
                               ) ,),
                               const SizedBox(width: 20.0,),        
                             ],
@@ -82,14 +85,15 @@ class DetailPage extends StatelessWidget {
                               Text("ECO",),
                               Spacer(),
                               Text("Rp 16.000",style: TextStyle(
-                                color: Color.fromARGB(255, 255, 23, 68),
+                                color: Color.fromARGB(255, 255, 23, 68),fontWeight:FontWeight.bold,
                               ) ,),
                               const SizedBox(width: 20.0,),        
                             ],
                           ),
                     ],
                     ),
-                    
+
+                    // SICEPAT
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -101,7 +105,7 @@ class DetailPage extends StatelessWidget {
                               Text("ECO",),
                               Spacer(),
                               Text("Rp 16.000",style: TextStyle(
-                                color: Color.fromARGB(255, 255, 23, 68),
+                                color: Color.fromARGB(255, 255, 23, 68),fontWeight:FontWeight.bold,
                               ) ,),
                               const SizedBox(width: 20.0,),        
                             ],
@@ -112,23 +116,96 @@ class DetailPage extends StatelessWidget {
                               Text("ECO",),
                               Spacer(),
                               Text("Rp 16.000",style: TextStyle(
-                                color: Color.fromARGB(255, 255, 23, 68),
+                                color: Color.fromARGB(255, 255, 23, 68),fontWeight:FontWeight.bold,
                               ) ,),
                               const SizedBox(width: 20.0,),        
                             ],
                           ),
                     ],
                     ),
+
+   // SICEPAT
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                        const SizedBox(height: 20.0,),
+                      Text("Sicepat", style: TextStyle(fontWeight:FontWeight.bold),),
+                      const SizedBox(height: 10.0,),
+                          Row(
+                            children: [
+                              Text("ECO",),
+                              Spacer(),
+                              Text("Rp 16.000",style: TextStyle(
+                                color: Color.fromARGB(255, 255, 23, 68),fontWeight:FontWeight.bold,
+                              ) ,),
+                              const SizedBox(width: 20.0,),        
+                            ],
+                          ),
+                                                const SizedBox(height: 10.0,),
+                          Row(
+                            children: [
+                              Text("ECO",),
+                              Spacer(),
+                              Text("Rp 16.000",style: TextStyle(
+                                color: Color.fromARGB(255, 255, 23, 68),fontWeight:FontWeight.bold,
+                              ) ,),
+                              const SizedBox(width: 20.0,),        
+                            ],
+                          ),
+                    ],
+                    ),
+
+                       // SICEPAT
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                        const SizedBox(height: 20.0,),
+                      Text("Sicepat", style: TextStyle(fontWeight:FontWeight.bold),),
+                      const SizedBox(height: 10.0,),
+                          Row(
+                            children: [
+                              Text("ECO",),
+                              Spacer(),
+                              Text("Rp 16.000",style: TextStyle(
+                                color: Color.fromARGB(255, 255, 23, 68),fontWeight:FontWeight.bold,
+                              ) ,),
+                              const SizedBox(width: 20.0,),        
+                            ],
+                          ),
+                                                const SizedBox(height: 10.0,),
+                          Row(
+                            children: [
+                              Text("ECO",),
+                              Spacer(),
+                              Text("Rp 16.000",style: TextStyle(
+                                color: Color.fromARGB(255, 255, 23, 68),fontWeight:FontWeight.bold,
+                              ) ,),
+                              const SizedBox(width: 20.0,),        
+                            ],
+                          ),
+                    ],
+                    ),
+
+                    
                     ],
                   ),
 
-              ),
             ],
-          ),
         ),
-      ),
-    );
+      ),)
+      );
+
   }
+      Container _buildDivider(){
+      return Container(
+        height: 2.0,
+        width: double.maxFinite,
+        decoration: BoxDecoration(
+          color: Colors.grey.shade400,
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+      );
+    }
 }
 
 
