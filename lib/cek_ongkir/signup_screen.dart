@@ -76,6 +76,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            appBar: AppBar(
+        title: Text("Signup"),
+        backgroundColor: const Color.fromARGB(255, 255, 23, 68),
+        
+      ),
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Container(
@@ -174,7 +179,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 style: TextStyle(color: Colors.white),
                               ),
                               style: ElevatedButton.styleFrom(
-                                primary: Color(int.parse('FF6440', radix: 16))
+                                primary: Color(int.parse('FF1643', radix: 16))
                                     .withOpacity(1.0),
                                 minimumSize: Size(double.infinity, 48.0),
                               ),

@@ -71,6 +71,12 @@ String hashPassword(String password) {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            appBar: AppBar(
+        title: Text("Login"),
+        backgroundColor: const Color.fromARGB(255, 255, 23, 68),
+        automaticallyImplyLeading: false,
+        
+      ),
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Container(
@@ -155,7 +161,7 @@ String hashPassword(String password) {
                                 style: TextStyle(color: Colors.white),
                               ),
                               style: ElevatedButton.styleFrom(
-                                primary: Color(int.parse('FF6440', radix: 16))
+                                primary: Color(int.parse('FF1643', radix: 16))
                                     .withOpacity(1.0),
                                 minimumSize: Size(double.infinity, 48.0),
                               ),
@@ -194,7 +200,7 @@ String hashPassword(String password) {
                           style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.bold,
-                            color: Color(int.parse('FF6440', radix: 16))
+                            color: Color(int.parse('FF1643', radix: 16))
                                 .withOpacity(1.0),
                           ),
                         ),
