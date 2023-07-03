@@ -75,12 +75,9 @@ class _HomeState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255,255, 22, 67),
-        leading: BackButton(),
-        title: const Text('Cek Ongkir',),
+        title: const Text("Cek Ongkir"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -229,37 +226,31 @@ class _HomeState extends State<HomePage> {
               }).toList(),
             ),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor:  const Color.fromARGB(255,255, 22, 67),
-              ),
               onPressed: () {
                 // validasi
                 if (kota_asal == null || kota_tujuan == null || berat == null || kurir == null) {
                   
                   final snackBar = SnackBar(content: const Text("Isi bidang yang masih kosong"));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  
                   return;
                 }
-                
                 // proses saving data 
                 checkEkspedisiFields();
-              
 
                 // Navigasi ke halaman detail dengan membawa data yang diperlukan
                 Navigator.pushNamed(
-                  context,
-                  '/detail',
-                  arguments: {
-                    'kota_asal': kota_asal,
-                    'kota_tujuan': kota_tujuan,
-                    'berat': berat,
-                    'kurir': kurir,
-                  },
-                );
+                context,
+                '/detail',
+                arguments: {
+                  'kota_asal': kota_asal,
+                  'kota_tujuan': kota_tujuan,
+                  'berat': berat,
+                  'kurir': kurir,
+                },
+              );
+
               },
-              child: const Text('CEK',),
-              
+              child: const Text('Cek Ongkir'),
             ),
           ],
         ),

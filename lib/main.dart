@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       // Definisikan rute
       routes: {
         '/': (context) => const HomePage(),
-        '/detail': (context) => const MyApp(),
+        '/detail': (context) =>  DetailPage(),
         '/signup': (context) => SignUpScreen(),
         '/login': (context) => LoginScreen(),
       },
