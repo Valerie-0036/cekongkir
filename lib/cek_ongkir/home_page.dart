@@ -295,7 +295,7 @@ leading: BackButton(   ),
                     backgroundColor: const Color.fromARGB(255, 255, 23, 68),
                   ),
                   onPressed: () {
-                    // validasi
+                    // validasiver
                     if (kota_asal == null || kota_tujuan == null || berat == null || kurir == null) {
                       
                       final snackBar = SnackBar(content: const Text("Isi bidang yang masih kosong"));

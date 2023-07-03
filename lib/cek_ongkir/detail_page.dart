@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class DetailPage extends StatelessWidget {
   final String? kotaAsal;
   final String? kotaTujuan;
-  final int? beratBarang;
+  final String? berat;
 
-  const DetailPage({Key? key,  this.kotaAsal,  this.kotaTujuan, this.beratBarang}) : super(key: key);
+  const DetailPage({Key? key,  this.kotaAsal,  this.kotaTujuan, this.berat}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +13,12 @@ class DetailPage extends StatelessWidget {
 
     String? kotaAsalValue = kotaAsal;
     String? kotaTujuanValue = kotaTujuan;
-    int? beratBarangValue = beratBarang;
+    String? beratBarangValue = berat;
+
     if (arguments != null) {
       kotaAsalValue = arguments['kota_asal'];
       kotaTujuanValue = arguments['kota_tujuan'];
-      beratBarangValue = arguments['berat_barang'];
+      beratBarangValue = arguments['berat'];
     }
 
     return Scaffold(
@@ -51,7 +52,7 @@ class DetailPage extends StatelessWidget {
                   ,style:TextStyle(fontWeight:FontWeight.bold),),
                   const SizedBox(height: 10.0,),
                   Text("Berat"),
-                  Text("${beratBarang ?? 'Unknown'}"
+                  Text("${beratBarangValue ?? 'Unknown'}"
                   ,style:TextStyle(fontWeight:FontWeight.bold),),
                   const SizedBox(height: 10.0,),
                 ],
