@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,6 +13,48 @@ class _HomeState extends State<HomePage> {
   String? kota_tujuan;
   String? berat;
   String? kurir;
+
+  CollectionReference provinsiCollection =
+      FirebaseFirestore.instance.collection('provinsi');
+  
+  void checkEkspedisiFields() async {
+    // Cek apakah data provinsi asal dan tujuan sudah dipilih
+    if (kota_asal != null && kota_tujuan != null) {
+      try {
+        // Query Firestore untuk mendapatkan data provinsi asal
+        QuerySnapshot querySnapshot = await provinsiCollection
+            .where('provinsi', isEqualTo: kota_asal)
+            .get();
+
+        if (querySnapshot.docs.isNotEmpty) {
+          var doc = querySnapshot.docs.first;
+          int jarakAsal = doc['jarak'] as int;
+          String jarakAsalString = jarakAsal.toString();
+          print('Provinsi Asal: $kota_asal');
+          print('Jarak Asal: $jarakAsalString');
+        } else {
+          print('Provinsi Asal tidak ditemukan.');
+        }
+
+        // Query Firestore untuk mendapatkan data provinsi tujuan
+        querySnapshot = await provinsiCollection
+            .where('provinsi', isEqualTo: kota_tujuan)
+            .get();
+
+        if (querySnapshot.docs.isNotEmpty) {
+          var doc = querySnapshot.docs.first;
+          int jarakTujuan = doc['jarak'] as int;
+          String jarakTujuanString = jarakTujuan.toString();
+          print('Provinsi Tujuan: $kota_tujuan');
+          print('Jarak Tujuan: $jarakTujuanString');
+        } else {
+          print('Provinsi Tujuan tidak ditemukan.');
+        }
+      } catch (e) {
+        print('Terjadi kesalahan: $e');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -169,10 +212,13 @@ class _HomeState extends State<HomePage> {
               onPressed: () {
                 // validasi
                 if (kota_asal == null || kota_tujuan == null || berat == null || kurir == null) {
+                  
                   final snackBar = SnackBar(content: const Text("Isi bidang yang masih kosong"));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   return;
                 }
+                // proses saving data 
+                checkEkspedisiFields();
 
                 // Navigasi ke halaman detail dengan membawa data yang diperlukan
                 Navigator.pushNamed(
