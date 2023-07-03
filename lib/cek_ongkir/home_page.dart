@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
   // }
 
   void calculateDistance() async {
+    
     // Cek apakah data provinsi asal dan tujuan sudah dipilih
     if (kota_asal != null && kota_tujuan != null) {
       try {
@@ -89,9 +90,10 @@ class _HomePageState extends State<HomePage> {
         querySnapshot = await ekspedisiCollection
             .where('ekspedisi', isEqualTo: kurir)
             .get();
+            listLayananPerKm.clear();
 
          querySnapshot.docs.forEach((doc) {
-          listLayananPerKm.clear();
+          
   var ekspedisi = doc['ekspedisi'];
   var layanan = doc['layanan'];
   var per_km = doc['per_km'];
@@ -393,7 +395,6 @@ class _HomePageState extends State<HomePage> {
                     // proses saving data
                     calculateDistance();
                     print('Apaa');
-                    print(listLayananPerKm.length);
 
                     // Navigasi ke halaman detail dengan membawa data yang diperlukan
                     Navigator.pushNamed(
