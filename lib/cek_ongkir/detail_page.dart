@@ -1,29 +1,39 @@
 import 'package:flutter/material.dart';
 
-class DetailPage extends StatefulWidget {
-  const DetailPage({Key? key, kota_asal,  kota_tujuan,  berat,  kurir}) : super(key: key);
+class DetailPage extends StatelessWidget {
+  final String? kotaAsal;
+  final String? kotaTujuan;
 
-  @override
-  _DetailState createState() => _DetailState();
-}
+  const DetailPage({Key? key,  this.kotaAsal,  this.kotaTujuan}) : super(key: key);
 
-class _DetailState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
-    // Menerima argumen data dari halaman sebelumnya
-    final Map<String, String> args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+    final Map<String, dynamic>? arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+
+    String? kotaAsalValue = kotaAsal;
+    String? kotaTujuanValue = kotaTujuan;
+
+    if (arguments != null) {
+      kotaAsalValue = arguments['kota_asal'];
+      kotaTujuanValue = arguments['kota_tujuan'];
+    }
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Detail Cek Ongkir"),
+        title: Text("Detail Ongkir"),
       ),
       body: Center(
-        child: Text(
-          "Kota Asal: ${args['kota_asal']}\nKota Tujuan: ${args['kota_tujuan']}\nBerat: ${args['berat']} gram\nKurir: ${args['kurir']}",
-          style: const TextStyle(fontSize: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Provinsi Asal: ${kotaAsalValue ?? 'Unknown'}"),
+            Text("Provinsi Tujuan: ${kotaTujuanValue ?? 'Unknown'}"),
+            // Add other necessary UI elements
+          ],
         ),
       ),
     );
   }
 }
+
+
