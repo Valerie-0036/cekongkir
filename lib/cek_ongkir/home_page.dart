@@ -87,6 +87,11 @@ class _HomeState extends State<HomePage> {
         child: Column(
           children: [
             DropdownButton<String>(
+              padding: const EdgeInsets.all(5.0),
+              borderRadius: BorderRadius.circular(15.0),
+              underline:  SizedBox.shrink(),
+              isExpanded: true,
+              
               value: kota_asal,
               hint: const Text("Pilih Kota Asal"),
               onChanged: (String? newValue) {
@@ -141,6 +146,11 @@ class _HomeState extends State<HomePage> {
               }).toList(),
             ),
             DropdownButton<String>(
+              padding: const EdgeInsets.all(5.0),
+              borderRadius: BorderRadius.circular(15.0),
+              underline:  SizedBox.shrink(),
+              isExpanded: true,
+              
               value: kota_tujuan,
               hint: const Text("Pilih Kota Tujuan"),
               onChanged: (String? newValue) {
@@ -202,6 +212,11 @@ class _HomeState extends State<HomePage> {
               },
             ),
             DropdownButton<String>(
+              padding: const EdgeInsets.all(5.0),
+              borderRadius: BorderRadius.circular(15.0),
+              underline:  SizedBox.shrink(),
+              isExpanded: true,
+              
               value: kurir,
               hint: const Text("Pilih Kurir"),
               onChanged: (String? newValue) {
