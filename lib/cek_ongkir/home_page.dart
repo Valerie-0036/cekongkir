@@ -18,6 +18,8 @@ class _HomePageState extends State<HomePage> {
   int? per_km;
   String? ekspedisi;
   String? layanan;
+  List<Map<String, dynamic>> listLayananPerKm = []; // Declare as instance variable
+
 
   CollectionReference provinsiCollection =
       FirebaseFirestore.instance.collection('provinsi');
@@ -70,19 +72,31 @@ class _HomePageState extends State<HomePage> {
             .where('ekspedisi', isEqualTo: kurir)
             .get();
 
-        if (querySnapshot.docs.isNotEmpty) {
-  var doc = querySnapshot.docs.first;
+         querySnapshot.docs.forEach((doc) {
+          listLayananPerKm.clear();
+  var ekspedisi = doc['ekspedisi'];
+  var layanan = doc['layanan'];
+  var per_km = doc['per_km'];
+
   setState(() {
     ekspedisi = doc['ekspedisi'];
     layanan = doc['layanan'];
     per_km = doc['per_km'];
+
+    // Menambahkan data ke list
+    listLayananPerKm.add({
+      'ekspedisi': ekspedisi,
+      'layanan': layanan,
+      'per_km': per_km,
+    });
   });
-  print(
-      'Layanan untuk kurir $kurir ditemukan dalam ekspedisi ${doc.id}');
+
+  print('Layanan untuk kurir $kurir ditemukan dalam ekspedisi ${doc.id}');
+  print(listLayananPerKm);
   print(doc);
-} else {
-  print('Daftar Kurir tidak ditemukan.');
-}
+});
+
+
 
       } catch (e) {
         print('Terjadi kesalahan: $e');
@@ -302,6 +316,8 @@ class _HomePageState extends State<HomePage> {
                     }
                     // proses saving data
                     calculateDistance();
+                    print('Iniii');
+                    print(listLayananPerKm);
 
                     // Navigasi ke halaman detail dengan membawa data yang diperlukan
                     Navigator.pushNamed(
@@ -317,6 +333,7 @@ class _HomePageState extends State<HomePage> {
                         'layanan': layanan,
                         'per_km': per_km,
                         'ekspedisi' : ekspedisi,
+                        'listlayananPerkm' : listLayananPerKm,
                       },
                     );
                   },
