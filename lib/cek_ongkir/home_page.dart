@@ -15,6 +15,9 @@ class _HomePageState extends State<HomePage> {
   String? kurir;
   int? jarakAsal;
   int? jarakTujuan;
+  int? per_km;
+  String? ekspedisi;
+  String? layanan;
 
   CollectionReference provinsiCollection =
       FirebaseFirestore.instance.collection('provinsi');
@@ -68,13 +71,19 @@ class _HomePageState extends State<HomePage> {
             .get();
 
         if (querySnapshot.docs.isNotEmpty) {
-          var doc = querySnapshot.docs.first;
-          print(
-              'Layanan untuk kurir $kurir ditemukan dalam ekspedisi ${doc.id}');
-          print(doc);
-        } else {
-          print('Daftar Kurir tidak ditemukan.');
-        }
+  var doc = querySnapshot.docs.first;
+  setState(() {
+    ekspedisi = doc['ekspedisi'];
+    layanan = doc['layanan'];
+    per_km = doc['per_km'];
+  });
+  print(
+      'Layanan untuk kurir $kurir ditemukan dalam ekspedisi ${doc.id}');
+  print(doc);
+} else {
+  print('Daftar Kurir tidak ditemukan.');
+}
+
       } catch (e) {
         print('Terjadi kesalahan: $e');
       }
@@ -305,6 +314,9 @@ class _HomePageState extends State<HomePage> {
                         'kurir': kurir,
                         'jarakAsal': jarakAsal,
                         'jarakTujuan': jarakTujuan,
+                        'layanan': layanan,
+                        'per_km': per_km,
+                        'ekspedisi' : ekspedisi,
                       },
                     );
                   },
