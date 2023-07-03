@@ -58,9 +58,12 @@ class _HomeState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Cek Ongkir"),
+        backgroundColor: const Color.fromARGB(255,255, 22, 67),
+        leading: BackButton(),
+        title: const Text('Cek Ongkir',),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -209,16 +212,22 @@ class _HomeState extends State<HomePage> {
               }).toList(),
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor:  const Color.fromARGB(255,255, 22, 67),
+              ),
               onPressed: () {
                 // validasi
                 if (kota_asal == null || kota_tujuan == null || berat == null || kurir == null) {
                   
                   final snackBar = SnackBar(content: const Text("Isi bidang yang masih kosong"));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  
                   return;
                 }
+                
                 // proses saving data 
                 checkEkspedisiFields();
+              
 
                 // Navigasi ke halaman detail dengan membawa data yang diperlukan
                 Navigator.pushNamed(
@@ -232,7 +241,8 @@ class _HomeState extends State<HomePage> {
                   },
                 );
               },
-              child: const Text('Cek Ongkir'),
+              child: const Text('CEK',),
+              
             ),
           ],
         ),
