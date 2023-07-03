@@ -325,8 +325,7 @@ class _HomePageState extends State<HomePage> {
                                 decoration: BoxDecoration(
                         color: Colors.white, borderRadius: BorderRadius.circular(10)),
                           child: 
-                              DropdownButton<String>(
-                       
+                              DropdownButton<String>(         
                           borderRadius: BorderRadius.circular(15.0),
                           underline: SizedBox.shrink(),
                           isExpanded: true,
