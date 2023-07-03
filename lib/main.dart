@@ -4,6 +4,7 @@ import 'package:cekongkir/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:cekongkir/cek_ongkir/detail_page.dart';
 import 'package:cekongkir/cek_ongkir/home_page.dart';
+import 'package:cekongkir/cek_ongkir/homebar.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
@@ -34,8 +35,9 @@ class MyApp extends StatelessWidget {
         '/detail': (context) =>  DetailPage(),
         '/signup': (context) => SignUpScreen(),
         '/login': (context) => LoginScreen(),
+        '/homebar': (context) => HomeBar(),
       },
-      initialRoute: '/detail',
+      initialRoute: '/homebar',
     );
   }
 }
