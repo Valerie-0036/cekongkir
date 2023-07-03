@@ -25,6 +25,8 @@ class DetailPage extends StatelessWidget {
       beratBarangValue = arguments['berat'];
       jarakAsalValue = arguments['jarakAsal'];
       jarakTujuanValue = arguments['jarakTujuan'];
+      int hasil = ((jarakAsalValue ?? 0) - (jarakTujuanValue ?? 0)).abs();
+      jarakTujuanValue = hasil;
     }
 
     return Scaffold(

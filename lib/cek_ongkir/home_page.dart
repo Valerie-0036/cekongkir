@@ -58,6 +58,7 @@ class _HomePageState extends State<HomePage> {
           String jarakTujuanString = jarakTujuanValue.toString();
           print('Provinsi Tujuan: $kota_tujuan');
           print('Jarak Tujuan: $jarakTujuanString');
+          
         } else {
           print('Provinsi Tujuan tidak ditemukan.');
         }
