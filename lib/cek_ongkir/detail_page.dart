@@ -131,31 +131,32 @@ class DetailPage extends StatelessWidget {
                         height: 20.0,
                       ),
                         Text(
-                          "${listLayananPerKm[0]['ekspedisi']}",
+                          "${listLayananPerKm[0]['ekspedisi'] }",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(
                           height: 10.0,
                         ),
-                        for (int i =0  ; i<listLayananPerKm.length ;i++) ...[
-                          SizedBox(height:10),
-                        Row(
-                          children: [
-                            Text("${listLayananPerKm[i]['layanan']}"),
-                            Spacer(),
-                            Text(
-                              "Rp ${listLayananPerKm[i]['per_km']}",
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 23, 68),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 20.0,
-                            ),
-                          ],
-                        ),
-                      ],
+                        for (int i = 0; i < listLayananPerKm.length; i++) ...[
+  SizedBox(height: 10),
+  Row(
+    children: [
+      Text("${listLayananPerKm[i]['layanan']} "),
+      Spacer(),
+      Text(
+        "Rp. ${listLayananPerKm[i]['per_km'] * (jarakTujuanValue ?? 0)}",
+        style: TextStyle(
+          color: Color.fromARGB(255, 255, 23, 68),
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      const SizedBox(
+        width: 20.0,
+      ),
+    ],
+  ),
+],
+
                     ],
                   ),
                 ],
