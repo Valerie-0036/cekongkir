@@ -155,6 +155,7 @@ String hashPassword(String password) {
                             child: ElevatedButton(
                             onPressed: () {
                               login(context);
+                              Navigator.pushNamed(context, '/');
                               },
                               child: Text(
                                 'Login',
