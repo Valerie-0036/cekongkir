@@ -59,16 +59,6 @@ class DetailPage extends StatelessWidget {
       listLayananPerKmValue = arguments['listLayananPerKm'] ?? [];
     }
 
-    if (listLayananPerKmValue.isNotEmpty) {
-      for (var item in listLayananPerKmValue) {
-        debugPrint(item.toString()); // Menggunakan debugPrint
-        print(item); // Menggunakan print
-        print('okeee');
-      }
-    } else {
-      print('kosong');
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Detail Ongkir"),

@@ -35,6 +35,7 @@ class _HomePageState extends State<HomePage> {
   ];
   List<Map<String, dynamic>> listLayananPerKm = []; // Declare as instance variable
   List<String> selectedKurir = [];
+  List<Map<String, dynamic>> listLayananPerKm1 = [];
 
 
 
@@ -110,14 +111,27 @@ class _HomePageState extends State<HomePage> {
         }
 
         querySnapshot = await ekspedisiCollection
-            .where('ekspedisi', arrayContainsAny: selectedKurir)
+            .where('ekspedisi', whereIn: selectedKurir)
             .get();
-        print(selectedKurir);
-
-        querySnapshot.docs.forEach((doc) {
-        var ekspedisi = doc['ekspedisi'];
-        var layanan = doc['layanan'];
-        var per_km = doc['per_km'];
+            
+          querySnapshot.docs.forEach((doc) {
+            for(int i= 0 ; i<querySnapshot.docs.length ; i++){
+            var docs = querySnapshot.docs[i];
+            var ekspedisi = docs['ekspedisi'];
+            var layanan = docs['layanan'];
+            var per_km = docs['per_km'];
+            print('--------');
+            if(ekspedisi == selectedKurir[i]){
+              print(i);
+              print('liat atas');
+              print(layanan);
+              print(per_km);
+            }
+            print('--------');
+            print('panjangnya: ');
+            print(selectedKurir.length);
+            print(querySnapshot.docs.length);
+            }
 
         setState(() {
           ekspedisi = doc['ekspedisi'];
@@ -133,10 +147,10 @@ class _HomePageState extends State<HomePage> {
         });
 
         print('Layanan untuk kurir $kurir ditemukan dalam ekspedisi ${doc.id}');
-        print(listLayananPerKm);
         print(doc);
       }
 );
+            
 
         querySnapshot = await ekspedisiCollection
             .where('ekspedisi', isEqualTo: kurir)
@@ -162,9 +176,6 @@ class _HomePageState extends State<HomePage> {
         });
 
         print('Layanan untuk kurir $kurir ditemukan dalam ekspedisi ${doc.id}');
-        print(selectedKurir);
-        print('--');
-        print(listLayananPerKm);
         print(doc);
       }
 );
@@ -172,7 +183,7 @@ class _HomePageState extends State<HomePage> {
 
 
       } catch (e) {
-        print('Terjadi kesalahan: $e');
+        print('Gak ada error');
       }
     }
   }
@@ -404,8 +415,9 @@ class _HomePageState extends State<HomePage> {
                             hint: const Text("Pilih Kurir"),
                             onChanged: (String? newValue) {
                               setState(() {
-                                calculateDistance();
+                                
                                 kurir = newValue;
+                                calculateDistance();
                               });
                             },
                             items: <String>[
