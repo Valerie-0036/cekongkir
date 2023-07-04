@@ -134,21 +134,21 @@ String hashPassword(String password) {
                             ),
                           ),
                           SizedBox(height: 10.0),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/viamethod');
-                              },
-                              child: Text(
-                                'Forget Password?',
-                                style: TextStyle(
-                                  fontSize: 14.0,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                          ),
+                          // Align(
+                          //   alignment: Alignment.centerRight,
+                          //   child: GestureDetector(
+                          //     onTap: () {
+                          //       Navigator.pushNamed(context, '/viamethod');
+                          //     },
+                          //     child: Text(
+                          //       'Forget Password?',
+                          //       style: TextStyle(
+                          //         fontSize: 14.0,
+                          //         color: Colors.grey,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                           SizedBox(height: 20.0),
                           SizedBox(
                             width: double.infinity,
