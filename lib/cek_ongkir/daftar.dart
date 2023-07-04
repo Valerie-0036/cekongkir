@@ -24,23 +24,24 @@ class Daftar extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 255, 23, 68),
       ),
       body: SingleChildScrollView(
+        child: Padding(padding: const EdgeInsets.all(0.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            
-            Container(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child:Row(    
+          children: [Container(
+            color: Colors.white,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Pos Indonesia
+                    //Pos Indonesia
                     Container(
                       color: Color.fromARGB(255, 238, 238, 238),
                         padding: const EdgeInsets.all(16.0),
+                        
                       child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                      
+                     
                         children: [
                         CircleAvatar(
                           radius: 50,
@@ -85,17 +86,17 @@ class Daftar extends StatelessWidget {
 
 
 
-                  ],
-                ),
-
-                    ),  
-                    ),
-
-
-
                     
                   ],
+
                 ),
+                )
+              ],
+            ),
+          )],
+        ),
+        
+      )
               ),
     
     );
