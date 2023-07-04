@@ -18,6 +18,21 @@ class _HomePageState extends State<HomePage> {
   int? per_km;
   String? ekspedisi;
   String? layanan;
+  static const int _count = 11;
+  final List<bool> _checks = List.generate(_count, (_) => false);
+  final nama=[
+  'sicepatexp',
+  'jne',
+  'j&t',
+  'wahana',
+  'satria',
+  'lionparcel',
+  'tiki',
+  'pos',
+  'anteraja',
+  'ninja',
+  'idexpress',
+  ];
   List<Map<String, dynamic>> listLayananPerKm = []; // Declare as instance variable
 
 
@@ -132,301 +147,341 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Cek Ongkir"),
         backgroundColor: const Color.fromARGB(255, 255, 23, 68),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(0.0),
-        
-        child: Column(
-          children: [
-            Container(
-              color: const Color.fromARGB(255, 255, 23, 68),
-              child: Column(
-                
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                                                const SizedBox(height: 5.0),
-                        Text(
-                          'Asal Pengiriman',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: 5.0),
-                        Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10,),
-                                decoration: BoxDecoration(
-                        color: Colors.white, borderRadius: BorderRadius.circular(10)),
-                          child: 
-                              DropdownButton<String>(
-                                
-                                borderRadius: BorderRadius.circular(15.0),
-                                underline: SizedBox.shrink(),
-                                isExpanded: true,
-                                value: kota_asal,
-                                hint: const Text("Asal Pengiriman"),
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    kota_asal = newValue;
-                                    calculateDistance();
-                                  });
-                                },
-                                items: <String>[
-                                  'Aceh',
-                                  'Sumatera Utara',
-                                  'Riau',
-                                  'Sumatera Barat',
-                                  'Kepulauan Riau',
-                                  'Kepulauan Bangka Belitung',
-                                  'Bengkulu',
-                                  'Jambi',
-                                  'Sumatera Selatan',
-                                  'Lampung',
-                                  'DKI Jakarta',
-                                  'Banten',
-                                  'Jawa Barat',
-                                  'Jawa Tengah',
-                                  'Daerah Istimewa Yogyakarta',
-                                  'Jawa Timur',
-                                  'Bali',
-                                  'Kalimantan Tengah',
-                                  'Kalimantan Utara',
-                                  'Nusa Tenggara Barat',
-                                  'Kalimantan Selatan',
-                                  'Kalimantan Barat',
-                                  'Sulawesi Selatan',
-                                  'Sulawesi Barat',
-                                  'Sulawesi Tengah',
-                                  'Nusa Tenggara Timur',
-                                  'Kalimantan Timur',
-                                  'Sulawesi Tenggara',
-                                  'Maluku Utara',
-                                  'Maluku',
-                                  'Papua Barat',
-                                  'Gorontalo',
-                                  'Sulawesi Utara',
-                                  'Papua Tengah',
-                                  'Papua',
-                                  'Papua Barat Daya',
-                                  'Papua Pegunungan',
-                                  'Papua Selatan',
-                                  // daftar provinsi lainnya
-                                ].map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                              ),
-                        ),
-                        const SizedBox(height: 5.0),
-                        Text(
-                          'Tujuan Pengiriman',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: 5.0),
-                  
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10,),
-                                decoration: BoxDecoration(
-                        color: Colors.white, borderRadius: BorderRadius.circular(10)),
-                          child: 
-                            DropdownButton<String>(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(0.0),
           
-                          borderRadius: BorderRadius.circular(15.0),
-                          underline: SizedBox.shrink(),
-                          isExpanded: true,
-                          value: kota_tujuan,
-                          hint: const Text("Tujuan Pengiriman"),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              kota_tujuan = newValue;
-                              calculateDistance();
-                            });
-                          },
-                          items: <String>[
-                            'Aceh',
-                            'Sumatera Utara',
-                            'Riau',
-                            'Sumatera Barat',
-                            'Kepulauan Riau',
-                            'Kepulauan Bangka Belitung',
-                            'Bengkulu',
-                            'Jambi',
-                            'Sumatera Selatan',
-                            'Lampung',
-                            'DKI Jakarta',
-                            'Banten',
-                            'Jawa Barat',
-                            'Jawa Tengah',
-                            'Daerah Istimewa Yogyakarta',
-                            'Jawa Timur',
-                            'Bali',
-                            'Kalimantan Tengah',
-                            'Kalimantan Utara',
-                            'Nusa Tenggara Barat',
-                            'Kalimantan Selatan',
-                            'Kalimantan Barat',
-                            'Sulawesi Selatan',
-                            'Sulawesi Barat',
-                            'Sulawesi Tengah',
-                            'Nusa Tenggara Timur',
-                            'Kalimantan Timur',
-                            'Sulawesi Tenggara',
-                            'Maluku Utara',
-                            'Maluku',
-                            'Papua Barat',
-                            'Gorontalo',
-                            'Sulawesi Utara',
-                            'Papua Tengah',
-                            'Papua',
-                            'Papua Barat Daya',
-                            'Papua Pegunungan',
-                            'Papua Selatan',
-                            // daftar provinsi lainnya
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
+          child: Column(
+            children: [
+              Container(
+                color: const Color.fromARGB(255, 255, 23, 68),
+                child: Column(
                   
-                        ),
-                  
-                  
-                        const SizedBox(height: 5.0),
-                        Text(
-                          'Berat',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: 5.0),
-                        TextField(
-                          decoration: InputDecoration(
-                          fillColor: Colors.white,
-                          filled: true,
-                          hintText: 'Berat (kg)',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                                                  const SizedBox(height: 5.0),
+                          Text(
+                            'Asal Pengiriman',
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              color: Colors.white,
                             ),
                           ),
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) {
-                            berat = value;
-                          },
-                        ),
-                        const SizedBox(height: 5.0),
-                        Text(
-                          'Pilih Kurir',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: 5.0),
-                  
-                              Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10,),
-                                decoration: BoxDecoration(
-                        color: Colors.white, borderRadius: BorderRadius.circular(10)),
-                          child: 
-                              DropdownButton<String>(         
-                          borderRadius: BorderRadius.circular(15.0),
-                          underline: SizedBox.shrink(),
-                          isExpanded: true,
-                          value: kurir,
-                          hint: const Text("Pilih Kurir"),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              kurir = newValue;
-                            });
-                          },
-                          items: <String>[
-                            'sicepatexp',
-                            'jne',
-                            'j&t',
-                            'wahana',
-                            'satria',
-                            'lionparcel',
-                            'tiki',
-                            'pos',
-                            'anteraja',
-                            'ninja',
-                            'idexpress',
-                            // daftar kurir lainnya
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ), 
+                          const SizedBox(height: 5.0),
+                          Container(
+                              padding: EdgeInsets.symmetric(horizontal: 10,),
+                                  decoration: BoxDecoration(
+                          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+                            child: 
+                                DropdownButton<String>(
                                   
-                        ),
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  underline: SizedBox.shrink(),
+                                  isExpanded: true,
+                                  value: kota_asal,
+                                  hint: const Text("Asal Pengiriman"),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      kota_asal = newValue;
+                                      calculateDistance();
+                                    });
+                                  },
+                                  items: <String>[
+                                    'Aceh',
+                                    'Sumatera Utara',
+                                    'Riau',
+                                    'Sumatera Barat',
+                                    'Kepulauan Riau',
+                                    'Kepulauan Bangka Belitung',
+                                    'Bengkulu',
+                                    'Jambi',
+                                    'Sumatera Selatan',
+                                    'Lampung',
+                                    'DKI Jakarta',
+                                    'Banten',
+                                    'Jawa Barat',
+                                    'Jawa Tengah',
+                                    'Daerah Istimewa Yogyakarta',
+                                    'Jawa Timur',
+                                    'Bali',
+                                    'Kalimantan Tengah',
+                                    'Kalimantan Utara',
+                                    'Nusa Tenggara Barat',
+                                    'Kalimantan Selatan',
+                                    'Kalimantan Barat',
+                                    'Sulawesi Selatan',
+                                    'Sulawesi Barat',
+                                    'Sulawesi Tengah',
+                                    'Nusa Tenggara Timur',
+                                    'Kalimantan Timur',
+                                    'Sulawesi Tenggara',
+                                    'Maluku Utara',
+                                    'Maluku',
+                                    'Papua Barat',
+                                    'Gorontalo',
+                                    'Sulawesi Utara',
+                                    'Papua Tengah',
+                                    'Papua',
+                                    'Papua Barat Daya',
+                                    'Papua Pegunungan',
+                                    'Papua Selatan',
+                                    // daftar provinsi lainnya
+                                  ].map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                ),
+                          ),
+                          const SizedBox(height: 5.0),
+                          Text(
+                            'Tujuan Pengiriman',
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 5.0),
+                    
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 10,),
+                                  decoration: BoxDecoration(
+                          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+                            child: 
+                              DropdownButton<String>(
+            
+                            borderRadius: BorderRadius.circular(15.0),
+                            underline: SizedBox.shrink(),
+                            isExpanded: true,
+                            value: kota_tujuan,
+                            hint: const Text("Tujuan Pengiriman"),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                kota_tujuan = newValue;
+                                calculateDistance();
+                              });
+                            },
+                            items: <String>[
+                              'Aceh',
+                              'Sumatera Utara',
+                              'Riau',
+                              'Sumatera Barat',
+                              'Kepulauan Riau',
+                              'Kepulauan Bangka Belitung',
+                              'Bengkulu',
+                              'Jambi',
+                              'Sumatera Selatan',
+                              'Lampung',
+                              'DKI Jakarta',
+                              'Banten',
+                              'Jawa Barat',
+                              'Jawa Tengah',
+                              'Daerah Istimewa Yogyakarta',
+                              'Jawa Timur',
+                              'Bali',
+                              'Kalimantan Tengah',
+                              'Kalimantan Utara',
+                              'Nusa Tenggara Barat',
+                              'Kalimantan Selatan',
+                              'Kalimantan Barat',
+                              'Sulawesi Selatan',
+                              'Sulawesi Barat',
+                              'Sulawesi Tengah',
+                              'Nusa Tenggara Timur',
+                              'Kalimantan Timur',
+                              'Sulawesi Tenggara',
+                              'Maluku Utara',
+                              'Maluku',
+                              'Papua Barat',
+                              'Gorontalo',
+                              'Sulawesi Utara',
+                              'Papua Tengah',
+                              'Papua',
+                              'Papua Barat Daya',
+                              'Papua Pegunungan',
+                              'Papua Selatan',
+                              // daftar provinsi lainnya
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                    
+                          ),
+                    
+                    
+                          const SizedBox(height: 5.0),
+                          Text(
+                            'Berat',
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 5.0),
+                          TextField(
+                            decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            filled: true,
+                            hintText: 'Berat (kg)',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                                
+                              ),
+                            ),
+                            keyboardType: TextInputType.number,
+                            onChanged: (value) {
+                              berat = value;
+                            },
+                          ),
+                          const SizedBox(height: 5.0),
+                          Text(
+                            'Pilih Kurir',
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 5.0),
+                    
+                                Container(
+                              padding: EdgeInsets.symmetric(horizontal: 10,),
+                                  decoration: BoxDecoration(
+                          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+                            child: 
+                                DropdownButton<String>(         
+                            borderRadius: BorderRadius.circular(15.0),
+                            underline: SizedBox.shrink(),
+                        
+                            isExpanded: true,
+                            value: kurir,
+                            hint: const Text("Pilih Kurir"),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                calculateDistance();
+                                kurir = newValue;
+                              });
+                            },
+                            items: <String>[
+                              'sicepatexp',
+                              'jne',
+                              'j&t',
+                              'wahana',
+                              'satria',
+                              'lionparcel',
+                              'tiki',
+                              'pos',
+                              'anteraja',
+                              'ninja',
+                              'idexpress',
+                              // daftar kurir lainnya
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ), 
+                                    
+                          ),
+                    GridView.builder(
+                      shrinkWrap: true,
+          itemCount: _count,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+          itemBuilder: (_, i) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Stack(
+                
+                children: [
+                  Container(color: Colors.white),
+                  // Container(color: Colors.red[(i * 100) % 900]),
+                  Center(
+                    child: Column(
+                      children:[
+                        
+                        Checkbox(
+                        value: _checks[i],
+                        
+                        onChanged: (bool? newValue) {
+                                    setState(() {
+                                      // harusnya itu newValue, tp krn error w ksh true
+                                _checks[i] = true; 
+                                });
+                              },
+                      
+                      ),
+                      Text(nama[i]),
                       ],
                     ),
-                  ), 
+                  ),
                 ],
               ),
-            ),
-
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 5.0),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 23, 68),
-                  ),
-                  onPressed: () {
-                    // validasi
-                    if (kota_asal == null ||
-                        kota_tujuan == null ||
-                        berat == null ||
-                        kurir == null) {
-                      final snackBar =
-                          SnackBar(content: const Text("Isi bidang yang masih kosong"));
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      return;
-                    }
-                    // proses saving data
-                    calculateDistance();
-                    print('Apaa');
-
-                    // Navigasi ke halaman detail dengan membawa data yang diperlukan
-                    Navigator.pushNamed(
-                      context,
-                      '/detail',
-                      arguments: {
-                        'kota_asal': kota_asal,
-                        'kota_tujuan': kota_tujuan,
-                        'berat': berat,
-                        'kurir': kurir,
-                        'jarakAsal': jarakAsal,
-                        'jarakTujuan': jarakTujuan,
-                        'layanan': layanan,
-                        'per_km': per_km,
-                        'ekspedisi' : ekspedisi,
-                        'listLayananPerkm' : listLayananPerKm,
-                      },
-                    );
-                  },
-                  child: const Text('CEK'),
+            );
+          },
+        ),
+                        ],
+                      ),
+                    ), 
+                  ],
                 ),
-              ],
-            ),
-          ],
+              ),
+      
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 5.0),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 255, 23, 68),
+                    ),
+                    onPressed: () {
+                      // validasi
+                      if (kota_asal == null ||
+                          kota_tujuan == null ||
+                          berat == null ||
+                          kurir == null) {
+                        final snackBar =
+                            SnackBar(content: const Text("Isi bidang yang masih kosong"));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        return;
+                      }
+                      // proses saving data
+                      calculateDistance();
+                      print('Apaa');
+      
+                      // Navigasi ke halaman detail dengan membawa data yang diperlukan
+                      Navigator.pushNamed(
+                        context,
+                        '/detail',
+                        arguments: {
+                          'kota_asal': kota_asal,
+                          'kota_tujuan': kota_tujuan,
+                          'berat': berat,
+                          'kurir': kurir,
+                          'jarakAsal': jarakAsal,
+                          'jarakTujuan': jarakTujuan,
+                          'layanan': layanan,
+                          'per_km': per_km,
+                          'ekspedisi' : ekspedisi,
+                          'listLayananPerkm' : listLayananPerKm,
+                        },
+                      );
+                    },
+                    child: const Text('CEK'),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
