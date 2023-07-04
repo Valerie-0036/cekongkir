@@ -38,6 +38,7 @@ class DetailPage extends StatelessWidget {
     final List<Map<String, dynamic>> listLayananPerKm2 = arguments['listLayananPerkm2'];
     print('Liat dibawah');
     print(listLayananPerKm1.length);
+    print(listLayananPerKm2.length);
     String? kotaAsalValue = kotaAsal;
     String? kotaTujuanValue = kotaTujuan;
     String? beratBarangValue = berat;
@@ -135,7 +136,7 @@ class DetailPage extends StatelessWidget {
                         const SizedBox(
                           height: 10.0,
                         ),
-                        for (int i = 0; i < listLayananPerKm.length; i++) ...[
+                        for (int i = 0; i < listLayananPerKm1.length; i++) ...[
                         SizedBox(height: 10),
                         Row(
                           children: [
@@ -170,7 +171,7 @@ class DetailPage extends StatelessWidget {
                         const SizedBox(
                           height: 10.0,
                         ),
-                        for (int i = 0; i < listLayananPerKm.length; i++) ...[
+                        for (int i = 0; i < listLayananPerKm2.length; i++) ...[
                         SizedBox(height: 10),
                         Row(
                           children: [
