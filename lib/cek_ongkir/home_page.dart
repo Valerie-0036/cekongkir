@@ -34,6 +34,8 @@ class _HomePageState extends State<HomePage> {
   'idexpress',
   ];
   List<Map<String, dynamic>> listLayananPerKm = []; // Declare as instance variable
+  List<String> selectedKurir = [];
+
 
 
   CollectionReference provinsiCollection =
@@ -408,17 +410,21 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children:[
                         
-                        Checkbox(
-                        value: _checks[i],
-                        
-                        onChanged: (bool? newValue) {
-                                    setState(() {
-                                      // harusnya itu newValue, tp krn error w ksh true
-                                _checks[i] = true; 
-                                });
-                              },
-                      
-                      ),
+                      Checkbox(
+  value: _checks[i],
+  onChanged: (bool? newValue) {
+    setState(() {
+      _checks[i] = newValue ?? false;
+      if (_checks[i]) {
+        selectedKurir.add(nama[i]); // add the kurir to the list
+        print(selectedKurir);
+      } else {
+        selectedKurir.remove(nama[i]); // remove the kurir from the list
+      }
+    });
+  },
+),
+
                       Text(nama[i]),
                       ],
                     ),
