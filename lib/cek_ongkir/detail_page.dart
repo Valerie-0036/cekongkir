@@ -26,10 +26,13 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic> arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-    final List<Map<String, dynamic>> listLayananPerKm = arguments['listLayananPerkm'];
+    final Map<String, dynamic> arguments =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    final List<Map<String, dynamic>> listLayananPerKm =
+        arguments['listLayananPerkm'];
     String namaLayanan = listLayananPerKm[0]['layanan'];
     int kmLayanan = listLayananPerKm[0]['per_km'];
+    String ekspedisi1 = listLayananPerKm[0]['ekspedisi'];
     print(listLayananPerKm.length);
     print(namaLayanan);
     String? kotaAsalValue = kotaAsal;
@@ -121,58 +124,6 @@ class DetailPage extends StatelessWidget {
               _buildDivider(),
               Column(
                 children: [
-                  // Tiki
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      Text(
-                        "TIKI",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      for (var item in listLayananPerKmValue)
-                        Row(
-                          children: [
-                            Text(item['layanan']),
-                            Spacer(),
-                            Text(
-                              "Rp ${item['per_km']}",
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 23, 68),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 20.0,
-                            ),
-                          ],
-                        ),
-                    ],
-                  ),
-
-                  // SICEPAT
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      Text(
-                        "Sicepat",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      // Render the Sicepat data here
-                    ],
-                  ),
-
                   // Ekspedisi lainnya
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -180,29 +131,33 @@ class DetailPage extends StatelessWidget {
                       const SizedBox(
                         height: 20.0,
                       ),
-                      Text(
-                        "$ekspedisi",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      Row(
-                        children: [
-                          Text("$layanan"),
-                          Spacer(),
-                          Text(
-                            "Rp $per_km",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 255, 23, 68),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 20.0,
-                          ),
-                        ],
-                      ),
+                        Text(
+                          "${listLayananPerKm[0]['ekspedisi'] }",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        for (int i = 0; i < listLayananPerKm.length; i++) ...[
+  SizedBox(height: 10),
+  Row(
+    children: [
+      Text("${listLayananPerKm[i]['layanan']} "),
+      Spacer(),
+      Text(
+        "Rp. ${listLayananPerKm[i]['per_km'] * (jarakTujuanValue ?? 0)}",
+        style: TextStyle(
+          color: Color.fromARGB(255, 255, 23, 68),
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      const SizedBox(
+        width: 20.0,
+      ),
+    ],
+  ),
+],
+
                     ],
                   ),
                 ],
