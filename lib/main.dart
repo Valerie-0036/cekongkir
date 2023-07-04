@@ -10,13 +10,13 @@ import 'package:cekongkir/cek_ongkir/daftar.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
-  
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
+  );
 
-  runApp(const MyApp(), 
+  runApp(
+    const MyApp(),
   );
 }
 
@@ -30,16 +30,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      debugShowCheckedModeBanner: false, 
+      debugShowCheckedModeBanner: false,
       // Definisikan rute
       routes: {
         '/': (context) => const HomePage(),
-        '/detail': (context) =>  DetailPage(),
+        '/detail': (context) => DetailPage(),
         '/signup': (context) => SignUpScreen(),
         '/login': (context) => LoginScreen(),
         '/homebar': (context) => HomeBar(),
-        '/detail1' : (context) => DetailPage1(),
-        '/daftar' : (context) => Daftar(),
+        '/detail1': (context) => DetailPage1(),
+        '/daftar': (context) => Daftar(),
       },
       initialRoute: '/homebar',
     );

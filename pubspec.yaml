@@ -72,6 +72,15 @@ flutter:
   - assets/pos.png
   - assets/lionparcel.png
   - assets/ninja.png
+  - assets/wahana.jpg
+  - assets/tiki.png
+  - assets/sicepat.png
+  - assets/sap.jpg
+  - assets/jnt.png
+  - assets/jne.png
+  - assets/idexpress.png
+  - assets/anteraja.png
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
