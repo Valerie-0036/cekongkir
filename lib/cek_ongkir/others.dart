@@ -17,6 +17,11 @@ class Others extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    appBar: AppBar(
+        leading: BackButton(),
+        title: const Text("Lainnya"),
+        backgroundColor: const Color.fromARGB(255, 255, 23, 68),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,35 +74,40 @@ class Others extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Personal Information',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+
                   SizedBox(height: 8.0),
                   ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text('Edit Profile'),
+                    leading: Icon(Icons.add_box),
+                    title: Text('Daftar Ekspedisi'),
                     onTap: () {
                       // Action when "Edit Profile" is tapped
+                      Navigator.pushReplacementNamed(context, '/daftar');
                     },
                   ),
-                  ListTile(
-                    leading: Icon(Icons.payment),
-                    title: Text('Payment Methods'),
-                    onTap: () {
-                      // Action when "Payment Methods" is tapped
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.help),
-                    title: Text('help'),
-                    onTap: () {
-                      // Action when "Delivery Addresses" is tapped
-                    },
-                  ), 
+                  // ListTile(
+                  //   leading: Icon(Icons.payment),
+                  //   title: Text('Payment Methods'),
+                  //   onTap: () {
+                  //     // Action when "Payment Methods" is tapped
+                  //   },
+                  // ),
+                  // ListTile(
+                  //   leading: Icon(Icons.help),
+                  //   title: Text('help'),
+                  //   onTap: () {
+                  //     // Action when "Delivery Addresses" is tapped
+                  //   },
+                  // ), 
+                  ElevatedButton(
+                      onPressed: (){
+                        
+                      },
+                      child: Text('Log Out'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(int.parse('D7224F', radix: 16)).withOpacity(1.0), // Warna oranye
+                        minimumSize: Size(double.infinity, 48.0),
+                      ),
+                    ),
                 ],
               ),
             ),
