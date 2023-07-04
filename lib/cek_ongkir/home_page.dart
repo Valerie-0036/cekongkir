@@ -356,6 +356,14 @@ class _HomePageState extends State<HomePage> {
                             'sicepatexp',
                             'jne',
                             'j&t',
+                            'wahana',
+                            'satria',
+                            'lionparcel',
+                            'tiki',
+                            'pos',
+                            'anteraja',
+                            'ninja',
+                            'idexpress',
                             // daftar kurir lainnya
                           ].map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
