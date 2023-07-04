@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:cekongkir/cek_ongkir/detail_page.dart';
 import 'package:cekongkir/cek_ongkir/home_page.dart';
 import 'package:cekongkir/cek_ongkir/homebar.dart';
+import 'package:cekongkir/cek_ongkir/daftar.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginScreen(),
         '/homebar': (context) => HomeBar(),
         '/detail1' : (context) => DetailPage1(),
+        '/daftar' : (context) => Daftar(),
       },
       initialRoute: '/homebar',
     );
