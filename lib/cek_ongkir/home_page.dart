@@ -116,21 +116,17 @@ class _HomePageState extends State<HomePage> {
             
           querySnapshot.docs.forEach((doc) {
             for(int i= 0 ; i<querySnapshot.docs.length ; i++){
+              for(int j=0 ; j<selectedKurir.length; j++){
             var docs = querySnapshot.docs[i];
             var ekspedisi = docs['ekspedisi'];
             var layanan = docs['layanan'];
             var per_km = docs['per_km'];
             print('--------');
-            if(ekspedisi == selectedKurir[i]){
-              print(i);
-              print('liat atas');
+            if(ekspedisi == selectedKurir[j]){
               print(layanan);
               print(per_km);
             }
-            print('--------');
-            print('panjangnya: ');
-            print(selectedKurir.length);
-            print(querySnapshot.docs.length);
+              }
             }
 
         setState(() {
