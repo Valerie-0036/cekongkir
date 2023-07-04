@@ -115,19 +115,31 @@ class _HomePageState extends State<HomePage> {
             .get();
             
           querySnapshot.docs.forEach((doc) {
-            for(int i= 0 ; i<querySnapshot.docs.length ; i++){
-              for(int j=0 ; j<selectedKurir.length; j++){
-            var docs = querySnapshot.docs[i];
-            var ekspedisi = docs['ekspedisi'];
-            var layanan = docs['layanan'];
-            var per_km = docs['per_km'];
-            print('--------');
-            if(ekspedisi == selectedKurir[j]){
-              print(layanan);
-              print(per_km);
-            }
-              }
-            }
+            for (int i = 0; i < querySnapshot.docs.length; i++) {
+  var docs = querySnapshot.docs[i];
+  var ekspedisi = docs['ekspedisi'];
+  var layanan = docs['layanan'];
+  var per_km = docs['per_km'];
+  
+  for (int j = 0; j < selectedKurir.length; j++) {
+    if (ekspedisi == selectedKurir[j]) {
+      if (j == 0) {
+        print('Data pertama:');
+        print(layanan);
+        print(per_km);
+        // Tindakan khusus untuk selectedKurir pertama
+        // ...
+      } else {
+        print('Data Kedua:');
+        print(layanan);
+        print(per_km);
+        // Tindakan untuk selectedKurir selain yang pertama
+        // ...
+      }
+    }
+  }
+}
+
 
         setState(() {
           ekspedisi = doc['ekspedisi'];
