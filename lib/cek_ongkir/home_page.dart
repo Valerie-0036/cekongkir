@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   List<Map<String, dynamic>> listLayananPerKm = []; // Declare as instance variable
   List<String> selectedKurir = [];
   List<Map<String, dynamic>> listLayananPerKm1 = [];
+  List<Map<String, dynamic>> listLayananPerKm2 = [];
 
 
 
@@ -90,7 +91,8 @@ class _HomePageState extends State<HomePage> {
         } else {
           print('Provinsi Asal tidak ditemukan.');
         }
-
+        listLayananPerKm1.clear();
+        listLayananPerKm2.clear();
         // Query Firestore untuk mendapatkan data provinsi tujuan
         querySnapshot = await provinsiCollection
             .where('provinsi', isEqualTo: kota_tujuan)
@@ -114,50 +116,42 @@ class _HomePageState extends State<HomePage> {
             .where('ekspedisi', whereIn: selectedKurir)
             .get();
             
-          querySnapshot.docs.forEach((doc) {
+            
+
             for (int i = 0; i < querySnapshot.docs.length; i++) {
-  var docs = querySnapshot.docs[i];
-  var ekspedisi = docs['ekspedisi'];
-  var layanan = docs['layanan'];
-  var per_km = docs['per_km'];
+  var doc = querySnapshot.docs[i];
+  var ekspedisi = doc['ekspedisi'];
+  var layanan = doc['layanan'];
+  var per_km = doc['per_km'];
   
-  for (int j = 0; j < selectedKurir.length; j++) {
-    if (ekspedisi == selectedKurir[j]) {
-      if (j == 0) {
-        print('Data pertama:');
-        print(layanan);
-        print(per_km);
-        // Tindakan khusus untuk selectedKurir pertama
-        // ...
-      } else {
-        print('Data Kedua:');
-        print(layanan);
-        print(per_km);
-        // Tindakan untuk selectedKurir selain yang pertama
-        // ...
-      }
-    }
+  if (ekspedisi == selectedKurir[0]) {
+    setState(() {
+      // Menambahkan data ke listLayananPerKm1
+      listLayananPerKm1.add({
+        'ekspedisi': ekspedisi,
+        'layanan': layanan,
+        'per_km': per_km,
+      });
+    });
+    // Tindakan khusus untuk selectedKurir pertama
+    // ...
+  } else {
+    setState(() {
+      // Menambahkan data ke listLayananPerKm2
+      listLayananPerKm2.add({
+        'ekspedisi': ekspedisi,
+        'layanan': layanan,
+        'per_km': per_km,
+      });
+    });
+    // Tindakan untuk selectedKurir selain yang pertama
+    // ...
   }
 }
 
 
-        setState(() {
-          ekspedisi = doc['ekspedisi'];
-          layanan = doc['layanan'];
-          per_km = doc['per_km'];
 
-          // Menambahkan data ke list
-          listLayananPerKm.add({
-            'ekspedisi': ekspedisi,
-            'layanan': layanan,
-            'per_km': per_km,
-          });
-        });
 
-        print('Layanan untuk kurir $kurir ditemukan dalam ekspedisi ${doc.id}');
-        print(doc);
-      }
-);
             
 
         querySnapshot = await ekspedisiCollection
@@ -171,9 +165,6 @@ class _HomePageState extends State<HomePage> {
         var per_km = doc['per_km'];
 
         setState(() {
-          ekspedisi = doc['ekspedisi'];
-          layanan = doc['layanan'];
-          per_km = doc['per_km'];
 
           // Menambahkan data ke list
           listLayananPerKm.add({
@@ -184,7 +175,6 @@ class _HomePageState extends State<HomePage> {
         });
 
         print('Layanan untuk kurir $kurir ditemukan dalam ekspedisi ${doc.id}');
-        print(doc);
       }
 );
 
@@ -473,7 +463,6 @@ class _HomePageState extends State<HomePage> {
       _checks[i] = newValue ?? false;
       if (_checks[i]) {
         selectedKurir.add(kurir1[i]); // add the kurir to the list
-        print(selectedKurir);
       } else {
         selectedKurir.remove(kurir1[i]); // remove the kurir from the list
       }
@@ -520,6 +509,7 @@ class _HomePageState extends State<HomePage> {
                       // proses saving data
                       calculateDistance();
                       print('Apaa');
+                      print(listLayananPerKm.length);
       
                       // Navigasi ke halaman detail dengan membawa data yang diperlukan
                       Navigator.pushNamed(
@@ -536,6 +526,8 @@ class _HomePageState extends State<HomePage> {
                           'per_km': per_km,
                           'ekspedisi' : ekspedisi,
                           'listLayananPerkm' : listLayananPerKm,
+                          'listLayananPerkm1' : listLayananPerKm1,
+                          'listLayananPerkm2' : listLayananPerKm2,
                         },
                       );
                     },

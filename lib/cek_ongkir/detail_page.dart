@@ -10,6 +10,8 @@ class DetailPage extends StatelessWidget {
   final String? layananValue;
   final String? ekspedisiValue;
   final List<Map<String, dynamic>>? listLayananPerKm;
+  final List<Map<String, dynamic>>? listLayananPerKm1;
+  final List<Map<String, dynamic>>? listLayananPerKm2;
 
   const DetailPage({
     Key? key,
@@ -22,19 +24,20 @@ class DetailPage extends StatelessWidget {
     this.perKmValue,
     this.ekspedisiValue,
     this.listLayananPerKm,
+    this.listLayananPerKm1,
+    this.listLayananPerKm2,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic> arguments =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-    final List<Map<String, dynamic>> listLayananPerKm =
-        arguments['listLayananPerkm'];
-    String namaLayanan = listLayananPerKm[0]['layanan'];
-    int kmLayanan = listLayananPerKm[0]['per_km'];
-    String ekspedisi1 = listLayananPerKm[0]['ekspedisi'];
-    print(listLayananPerKm.length);
-    print(namaLayanan);
+    final Map<String, dynamic> arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    final List<Map<String, dynamic>> listLayananPerKm = arguments['listLayananPerkm'];
+    final Map<String, dynamic> arguments1 = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    final List<Map<String, dynamic>> listLayananPerKm1 = arguments['listLayananPerkm1'];
+    final Map<String, dynamic> arguments2 = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    final List<Map<String, dynamic>> listLayananPerKm2 = arguments['listLayananPerkm2'];
+    print('Liat dibawah');
+    print(listLayananPerKm1.length);
     String? kotaAsalValue = kotaAsal;
     String? kotaTujuanValue = kotaTujuan;
     String? beratBarangValue = berat;
@@ -44,6 +47,8 @@ class DetailPage extends StatelessWidget {
     int? per_km = perKmValue;
     String? ekspedisi = ekspedisiValue;
     List<Map<String, dynamic>> listLayananPerKmValue = listLayananPerKm ?? [];
+    List<Map<String, dynamic>> listLayananPerKm1Value = listLayananPerKm1 ?? [];
+    List<Map<String, dynamic>> listLayananPerKm2Value = listLayananPerKm2 ?? [];
 
     if (arguments != null) {
       kotaAsalValue = arguments['kota_asal'];
@@ -57,6 +62,9 @@ class DetailPage extends StatelessWidget {
       int hasil = ((jarakAsalValue ?? 0) - (jarakTujuanValue ?? 0)).abs();
       jarakTujuanValue = hasil;
       listLayananPerKmValue = arguments['listLayananPerKm'] ?? [];
+      listLayananPerKm1Value = arguments1['listLayananPerKm1'] ?? [];
+      listLayananPerKm2Value = arguments2['listLayananPerKm2'] ?? [];
+      
     }
 
     return Scaffold(
@@ -121,34 +129,69 @@ class DetailPage extends StatelessWidget {
                         height: 20.0,
                       ),
                         Text(
-                          "${listLayananPerKm[0]['ekspedisi'] }",
+                          "${listLayananPerKm1[0]['ekspedisi'] }",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(
                           height: 10.0,
                         ),
                         for (int i = 0; i < listLayananPerKm.length; i++) ...[
-  SizedBox(height: 10),
-  Row(
-    children: [
-      Text("${listLayananPerKm[i]['layanan']} "),
-      Spacer(),
-      Text(
-        "Rp. ${listLayananPerKm[i]['per_km'] * (jarakTujuanValue ?? 0)}",
-        style: TextStyle(
-          color: Color.fromARGB(255, 255, 23, 68),
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      const SizedBox(
-        width: 20.0,
-      ),
-    ],
-  ),
-],
-
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Text("${listLayananPerKm1[i]['layanan']} "),
+                            Spacer(),
+                            Text(
+                              "Rp. ${listLayananPerKm1[i]['per_km'] * (jarakTujuanValue ?? 0)}",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 255, 23, 68),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20.0,
+                            ),
+                          ],
+                        ),
+                      ],
                     ],
                   ),
+                  if (listLayananPerKm2.isNotEmpty) ...[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                        Text(
+                          "${listLayananPerKm2[0]['ekspedisi'] }",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        for (int i = 0; i < listLayananPerKm.length; i++) ...[
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Text("${listLayananPerKm2[i]['layanan']} "),
+                            Spacer(),
+                            Text(
+                              "Rp. ${listLayananPerKm2[i]['per_km'] * (jarakTujuanValue ?? 0)}",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 255, 23, 68),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20.0,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ],
+                  ),
+                  ],
                 ],
               ),
             ],
