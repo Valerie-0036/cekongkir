@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   String? layanan;
   static const int _count = 11;
   final List<bool> _checks = List.generate(_count, (_) => false);
-  final nama=[
+  final kurir1=[
   'sicepatexp',
   'jne',
   'j&t',
@@ -66,8 +66,13 @@ class _HomePageState extends State<HomePage> {
     // Cek apakah data provinsi asal dan tujuan sudah dipilih
     if (kota_asal != null && kota_tujuan != null) {
       try {
-        // Query Firestore untuk mendapatkan data provinsi asal
+
         QuerySnapshot querySnapshot = await provinsiCollection
+            .where('provinsi', isEqualTo: kota_asal)
+            .get();
+
+        // Query Firestore untuk mendapatkan data provinsi asal
+        querySnapshot = await provinsiCollection
             .where('provinsi', isEqualTo: kota_asal)
             .get();
 
@@ -105,33 +110,64 @@ class _HomePageState extends State<HomePage> {
         }
 
         querySnapshot = await ekspedisiCollection
+            .where('ekspedisi', arrayContainsAny: selectedKurir)
+            .get();
+        print(selectedKurir);
+
+        querySnapshot.docs.forEach((doc) {
+        var ekspedisi = doc['ekspedisi'];
+        var layanan = doc['layanan'];
+        var per_km = doc['per_km'];
+
+        setState(() {
+          ekspedisi = doc['ekspedisi'];
+          layanan = doc['layanan'];
+          per_km = doc['per_km'];
+
+          // Menambahkan data ke list
+          listLayananPerKm.add({
+            'ekspedisi': ekspedisi,
+            'layanan': layanan,
+            'per_km': per_km,
+          });
+        });
+
+        print('Layanan untuk kurir $kurir ditemukan dalam ekspedisi ${doc.id}');
+        print(listLayananPerKm);
+        print(doc);
+      }
+);
+
+        querySnapshot = await ekspedisiCollection
             .where('ekspedisi', isEqualTo: kurir)
             .get();
             listLayananPerKm.clear();
 
-         querySnapshot.docs.forEach((doc) {
-          
-  var ekspedisi = doc['ekspedisi'];
-  var layanan = doc['layanan'];
-  var per_km = doc['per_km'];
+        querySnapshot.docs.forEach((doc) {
+        var ekspedisi = doc['ekspedisi'];
+        var layanan = doc['layanan'];
+        var per_km = doc['per_km'];
 
-  setState(() {
-    ekspedisi = doc['ekspedisi'];
-    layanan = doc['layanan'];
-    per_km = doc['per_km'];
+        setState(() {
+          ekspedisi = doc['ekspedisi'];
+          layanan = doc['layanan'];
+          per_km = doc['per_km'];
 
-    // Menambahkan data ke list
-    listLayananPerKm.add({
-      'ekspedisi': ekspedisi,
-      'layanan': layanan,
-      'per_km': per_km,
-    });
-  });
+          // Menambahkan data ke list
+          listLayananPerKm.add({
+            'ekspedisi': ekspedisi,
+            'layanan': layanan,
+            'per_km': per_km,
+          });
+        });
 
-  print('Layanan untuk kurir $kurir ditemukan dalam ekspedisi ${doc.id}');
-  print(listLayananPerKm);
-  print(doc);
-});
+        print('Layanan untuk kurir $kurir ditemukan dalam ekspedisi ${doc.id}');
+        print(selectedKurir);
+        print('--');
+        print(listLayananPerKm);
+        print(doc);
+      }
+);
 
 
 
@@ -416,16 +452,17 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _checks[i] = newValue ?? false;
       if (_checks[i]) {
-        selectedKurir.add(nama[i]); // add the kurir to the list
+        selectedKurir.add(kurir1[i]); // add the kurir to the list
         print(selectedKurir);
       } else {
-        selectedKurir.remove(nama[i]); // remove the kurir from the list
+        selectedKurir.remove(kurir1[i]); // remove the kurir from the list
       }
+      calculateDistance();
     });
   },
 ),
 
-                      Text(nama[i]),
+                      Text(kurir1[i]),
                       ],
                     ),
                   ),
