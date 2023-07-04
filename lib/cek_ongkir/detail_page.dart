@@ -71,7 +71,6 @@ class DetailPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(),
         title: Text("Detail Ongkir"),
         backgroundColor: const Color.fromARGB(255, 255, 23, 68),
       ),
