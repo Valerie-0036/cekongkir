@@ -136,7 +136,7 @@ class DetailPage extends StatelessWidget {
                             Text("${listLayananPerKm1[i]['layanan']} "),
                             Spacer(),
                             Text(
-                              "Rp. ${listLayananPerKm1[i]['per_km'] * (jarakTujuanValue ?? 0) }",
+                              "Rp. ${listLayananPerKm1[i]['per_km'] * (jarakTujuanValue ?? 0) * int.tryParse(beratBarangValue!)}",
                               style: TextStyle(
                                 color: Color.fromARGB(255, 255, 23, 68),
                                 fontWeight: FontWeight.bold,
@@ -171,7 +171,7 @@ class DetailPage extends StatelessWidget {
                             Text("${listLayananPerKm2[i]['layanan']} "),
                             Spacer(),
                             Text(
-                              "Rp. ${listLayananPerKm2[i]['per_km'] * (jarakTujuanValue ?? 0) }",
+                              "Rp. ${listLayananPerKm2[i]['per_km'] * (jarakTujuanValue ?? 0) * int.tryParse(beratBarangValue!) }",
                               style: TextStyle(
                                 color: Color.fromARGB(255, 255, 23, 68),
                                 fontWeight: FontWeight.bold,
