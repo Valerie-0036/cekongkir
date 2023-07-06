@@ -394,17 +394,26 @@ void calculateDistance() async {
   onChanged: (bool? newValue) {
     setState(() {
       isLoading = true;
-      _checks[i] = newValue ?? false;
-      if (_checks[i]) {
-        selectedKurir.add(kurir1[i]);// add the kurir to the list
-      } else {
-        selectedKurir.remove(kurir1[i]); 
-        // remove the kurir from the list
+
+      if (newValue == true && selectedKurir.length >= 2) {
+        // Maximum two checkboxes already selected, so prevent selecting more
+        _checks[i] = false;
+        return;
       }
+
+      _checks[i] = newValue ?? false;
+
+      if (_checks[i]) {
+        selectedKurir.add(kurir1[i]);
+      } else {
+        selectedKurir.remove(kurir1[i]);
+      }
+
       calculateDistance();
     });
   },
 ),
+
 
                       Text(kurir1[i]),
                       ],
