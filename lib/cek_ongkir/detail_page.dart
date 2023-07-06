@@ -9,7 +9,6 @@ class DetailPage extends StatelessWidget {
   final int? perKmValue;
   final String? layananValue;
   final String? ekspedisiValue;
-  final List<Map<String, dynamic>>? listLayananPerKm;
   final List<Map<String, dynamic>>? listLayananPerKm1;
   final List<Map<String, dynamic>>? listLayananPerKm2;
 
@@ -23,7 +22,6 @@ class DetailPage extends StatelessWidget {
     this.layananValue,
     this.perKmValue,
     this.ekspedisiValue,
-    this.listLayananPerKm,
     this.listLayananPerKm1,
     this.listLayananPerKm2,
   }) : super(key: key);
@@ -31,14 +29,11 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-    final List<Map<String, dynamic>> listLayananPerKm = arguments['listLayananPerkm'];
     final Map<String, dynamic> arguments1 = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
     final List<Map<String, dynamic>> listLayananPerKm1 = arguments['listLayananPerkm1'];
     final Map<String, dynamic> arguments2 = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
     final List<Map<String, dynamic>> listLayananPerKm2 = arguments['listLayananPerkm2'];
-    print('Liat dibawah');
-    print(listLayananPerKm1.length);
-    print(listLayananPerKm2.length);
+
     String? kotaAsalValue = kotaAsal;
     String? kotaTujuanValue = kotaTujuan;
     String? beratBarangValue = berat;
@@ -47,7 +42,6 @@ class DetailPage extends StatelessWidget {
     String? layanan = layananValue;
     int? per_km = perKmValue;
     String? ekspedisi = ekspedisiValue;
-    List<Map<String, dynamic>> listLayananPerKmValue = listLayananPerKm ?? [];
     List<Map<String, dynamic>> listLayananPerKm1Value = listLayananPerKm1 ?? [];
     List<Map<String, dynamic>> listLayananPerKm2Value = listLayananPerKm2 ?? [];
 
@@ -62,7 +56,6 @@ class DetailPage extends StatelessWidget {
       ekspedisi = arguments['ekspedisi'];
       int hasil = ((jarakAsalValue ?? 0) - (jarakTujuanValue ?? 0)).abs();
       jarakTujuanValue = hasil;
-      listLayananPerKmValue = arguments['listLayananPerKm'] ?? [];
       listLayananPerKm1Value = arguments1['listLayananPerKm1'] ?? [];
       listLayananPerKm2Value = arguments2['listLayananPerKm2'] ?? [];
       
@@ -143,7 +136,7 @@ class DetailPage extends StatelessWidget {
                             Text("${listLayananPerKm1[i]['layanan']} "),
                             Spacer(),
                             Text(
-                              "Rp. ${listLayananPerKm1[i]['per_km'] * (jarakTujuanValue ?? 0)}",
+                              "Rp. ${listLayananPerKm1[i]['per_km'] * (jarakTujuanValue ?? 0) }",
                               style: TextStyle(
                                 color: Color.fromARGB(255, 255, 23, 68),
                                 fontWeight: FontWeight.bold,
@@ -178,7 +171,7 @@ class DetailPage extends StatelessWidget {
                             Text("${listLayananPerKm2[i]['layanan']} "),
                             Spacer(),
                             Text(
-                              "Rp. ${listLayananPerKm2[i]['per_km'] * (jarakTujuanValue ?? 0)}",
+                              "Rp. ${listLayananPerKm2[i]['per_km'] * (jarakTujuanValue ?? 0) }",
                               style: TextStyle(
                                 color: Color.fromARGB(255, 255, 23, 68),
                                 fontWeight: FontWeight.bold,

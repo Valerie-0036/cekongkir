@@ -9,10 +9,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isLoading = false;
   String? kota_asal;
   String? kota_tujuan;
   String? berat;
-  String? kurir;
   int? jarakAsal;
   int? jarakTujuan;
   int? per_km;
@@ -33,7 +33,6 @@ class _HomePageState extends State<HomePage> {
   'ninja',
   'idexpress',
   ];
-  List<Map<String, dynamic>> listLayananPerKm = []; // Declare as instance variable
   List<String> selectedKurir = [];
   List<Map<String, dynamic>> listLayananPerKm1 = [];
   List<Map<String, dynamic>> listLayananPerKm2 = [];
@@ -63,24 +62,25 @@ class _HomePageState extends State<HomePage> {
   //     }
   // }
 
-  void calculateDistance() async {
-    
-    // Cek apakah data provinsi asal dan tujuan sudah dipilih
-    if (kota_asal != null && kota_tujuan != null) {
-      try {
+void calculateDistance() async {
+  // Cek apakah data provinsi asal dan tujuan sudah dipilih
+  if (kota_asal != null && kota_tujuan != null) {
+    setState(() {
+      isLoading = true;
+    });
 
-        QuerySnapshot querySnapshot = await provinsiCollection
-            .where('provinsi', isEqualTo: kota_asal)
-            .get();
+    try {
+      // Query Firestore untuk mendapatkan data provinsi asal dan tujuan
+      QuerySnapshot querySnapshot = await provinsiCollection
+          .where('provinsi', whereIn: [kota_asal, kota_tujuan])
+          .get();
 
-        // Query Firestore untuk mendapatkan data provinsi asal
-        querySnapshot = await provinsiCollection
-            .where('provinsi', isEqualTo: kota_asal)
-            .get();
-
-        if (querySnapshot.docs.isNotEmpty) {
-          var doc = querySnapshot.docs.first;
-          int jarakAsalValue = doc['jarak'] as int;
+      // Process data provinsi asal
+      if (querySnapshot.docs.isNotEmpty) {
+        var asalDocs = querySnapshot.docs.where((doc) => doc['provinsi'] == kota_asal);
+        if (asalDocs.isNotEmpty) {
+          var asalDoc = asalDocs.first;
+          int jarakAsalValue = asalDoc['jarak'] as int;
           setState(() {
             jarakAsal = jarakAsalValue;
           });
@@ -91,100 +91,67 @@ class _HomePageState extends State<HomePage> {
         } else {
           print('Provinsi Asal tidak ditemukan.');
         }
-        listLayananPerKm1.clear();
-        listLayananPerKm2.clear();
-        // Query Firestore untuk mendapatkan data provinsi tujuan
-        querySnapshot = await provinsiCollection
-            .where('provinsi', isEqualTo: kota_tujuan)
-            .get();
+      }
 
-        if (querySnapshot.docs.isNotEmpty) {
-          var doc = querySnapshot.docs.first;
-          int jarakTujuanValue = doc['jarak'] as int;
+      // Process data provinsi tujuan
+      if (querySnapshot.docs.isNotEmpty) {
+        var tujuanDocs = querySnapshot.docs.where((doc) => doc['provinsi'] == kota_tujuan);
+        if (tujuanDocs.isNotEmpty) {
+          var tujuanDoc = tujuanDocs.first;
+          int jarakTujuanValue = tujuanDoc['jarak'] as int;
           setState(() {
             jarakTujuan = jarakTujuanValue;
           });
           String jarakTujuanString = jarakTujuanValue.toString();
           print('Provinsi Tujuan: $kota_tujuan');
           print('Jarak Tujuan: $jarakTujuanString');
-          
         } else {
           print('Provinsi Tujuan tidak ditemukan.');
         }
+      }
 
-        querySnapshot = await ekspedisiCollection
-            .where('ekspedisi', whereIn: selectedKurir)
-            .get();
-            
-            
+      // Query Firestore untuk mendapatkan data ekspedisi berdasarkan kurir yang dipilih
+      querySnapshot = await ekspedisiCollection
+          .where('ekspedisi', whereIn: selectedKurir)
+          .get();
 
-            for (int i = 0; i < querySnapshot.docs.length; i++) {
-  var doc = querySnapshot.docs[i];
-  var ekspedisi = doc['ekspedisi'];
-  var layanan = doc['layanan'];
-  var per_km = doc['per_km'];
-  
-  if (ekspedisi == selectedKurir[0]) {
-    setState(() {
-      // Menambahkan data ke listLayananPerKm1
-      listLayananPerKm1.add({
-        'ekspedisi': ekspedisi,
-        'layanan': layanan,
-        'per_km': per_km,
+      // Process data ekspedisi
+      listLayananPerKm1.clear();
+      listLayananPerKm2.clear();
+
+      for (var doc in querySnapshot.docs) {
+        var ekspedisi = doc['ekspedisi'];
+        var layanan = doc['layanan'];
+        var perKm = doc['per_km'];
+
+        if (ekspedisi == selectedKurir[0]) {
+          // Menambahkan data ke listLayananPerKm1
+          listLayananPerKm1.add({
+            'ekspedisi': ekspedisi,
+            'layanan': layanan,
+            'per_km': perKm,
+          });
+        } else {
+          // Menambahkan data ke listLayananPerKm2
+          listLayananPerKm2.add({
+            'ekspedisi': ekspedisi,
+            'layanan': layanan,
+            'per_km': perKm,
+          });
+        }
+      }
+    } catch (e) {
+      print('Error: $e');
+      // Handle error gracefully, e.g., show a snackbar or alert dialog
+    } finally {
+      setState(() {
+        isLoading = false;
       });
-    });
-    // Tindakan khusus untuk selectedKurir pertama
-    // ...
-  } else {
-    setState(() {
-      // Menambahkan data ke listLayananPerKm2
-      listLayananPerKm2.add({
-        'ekspedisi': ekspedisi,
-        'layanan': layanan,
-        'per_km': per_km,
-      });
-    });
-    // Tindakan untuk selectedKurir selain yang pertama
-    // ...
+    }
   }
 }
 
 
-
-
-            
-
-        querySnapshot = await ekspedisiCollection
-            .where('ekspedisi', isEqualTo: kurir)
-            .get();
-            listLayananPerKm.clear();
-
-        querySnapshot.docs.forEach((doc) {
-        var ekspedisi = doc['ekspedisi'];
-        var layanan = doc['layanan'];
-        var per_km = doc['per_km'];
-
-        setState(() {
-
-          // Menambahkan data ke list
-          listLayananPerKm.add({
-            'ekspedisi': ekspedisi,
-            'layanan': layanan,
-            'per_km': per_km,
-          });
-        });
-
-        print('Layanan untuk kurir $kurir ditemukan dalam ekspedisi ${doc.id}');
-      }
-);
-
-
-
-      } catch (e) {
-        print('Gak ada error');
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -234,6 +201,7 @@ class _HomePageState extends State<HomePage> {
                                   hint: const Text("Asal Pengiriman"),
                                   onChanged: (String? newValue) {
                                     setState(() {
+                                      isLoading = true;
                                       kota_asal = newValue;
                                       calculateDistance();
                                     });
@@ -310,6 +278,7 @@ class _HomePageState extends State<HomePage> {
                             hint: const Text("Tujuan Pengiriman"),
                             onChanged: (String? newValue) {
                               setState(() {
+                                isLoading = true;
                                 kota_tujuan = newValue;
                                 calculateDistance();
                               });
@@ -385,9 +354,14 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             keyboardType: TextInputType.number,
-                            onChanged: (value) {
-                              berat = value;
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                isLoading = true;
+                                berat = newValue;
+                                calculateDistance();
+                              });
                             },
+                            
                           ),
                           const SizedBox(height: 5.0),
                           Text(
@@ -399,47 +373,6 @@ class _HomePageState extends State<HomePage> {
                           ),
                           const SizedBox(height: 5.0),
                     
-                                Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10,),
-                                  decoration: BoxDecoration(
-                          color: Colors.white, borderRadius: BorderRadius.circular(10)),
-                            child: 
-                                DropdownButton<String>(         
-                            borderRadius: BorderRadius.circular(15.0),
-                            underline: SizedBox.shrink(),
-                        
-                            isExpanded: true,
-                            value: kurir,
-                            hint: const Text("Pilih Kurir"),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                
-                                kurir = newValue;
-                                calculateDistance();
-                              });
-                            },
-                            items: <String>[
-                              'sicepatexp',
-                              'jne',
-                              'j&t',
-                              'wahana',
-                              'satria',
-                              'lionparcel',
-                              'tiki',
-                              'pos',
-                              'anteraja',
-                              'ninja',
-                              'idexpress',
-                              // daftar kurir lainnya
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ), 
-                                    
-                          ),
                     GridView.builder(
                       shrinkWrap: true,
           itemCount: _count,
@@ -460,11 +393,13 @@ class _HomePageState extends State<HomePage> {
   value: _checks[i],
   onChanged: (bool? newValue) {
     setState(() {
+      isLoading = true;
       _checks[i] = newValue ?? false;
       if (_checks[i]) {
-        selectedKurir.add(kurir1[i]); // add the kurir to the list
+        selectedKurir.add(kurir1[i]);// add the kurir to the list
       } else {
-        selectedKurir.remove(kurir1[i]); // remove the kurir from the list
+        selectedKurir.remove(kurir1[i]); 
+        // remove the kurir from the list
       }
       calculateDistance();
     });
@@ -496,11 +431,12 @@ class _HomePageState extends State<HomePage> {
                       backgroundColor: const Color.fromARGB(255, 255, 23, 68),
                     ),
                     onPressed: () {
+                      bool isLoading = true;
                       // validasi
                       if (kota_asal == null ||
                           kota_tujuan == null ||
-                          berat == null ||
-                          kurir == null) {
+                          berat == null 
+                          ) {
                         final snackBar =
                             SnackBar(content: const Text("Isi bidang yang masih kosong"));
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -508,8 +444,7 @@ class _HomePageState extends State<HomePage> {
                       }
                       // proses saving data
                       calculateDistance();
-                      print('Apaa');
-                      print(listLayananPerKm.length);
+                      
       
                       // Navigasi ke halaman detail dengan membawa data yang diperlukan
                       Navigator.pushNamed(
@@ -519,13 +454,11 @@ class _HomePageState extends State<HomePage> {
                           'kota_asal': kota_asal,
                           'kota_tujuan': kota_tujuan,
                           'berat': berat,
-                          'kurir': kurir,
                           'jarakAsal': jarakAsal,
                           'jarakTujuan': jarakTujuan,
                           'layanan': layanan,
                           'per_km': per_km,
                           'ekspedisi' : ekspedisi,
-                          'listLayananPerkm' : listLayananPerKm,
                           'listLayananPerkm1' : listLayananPerKm1,
                           'listLayananPerkm2' : listLayananPerKm2,
                         },
