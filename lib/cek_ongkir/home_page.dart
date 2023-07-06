@@ -454,24 +454,29 @@ void calculateDistance() async {
                       // proses saving data
                       calculateDistance();
                       
-      
+
                       // Navigasi ke halaman detail dengan membawa data yang diperlukan
-                      Navigator.pushNamed(
-                        context,
-                        '/detail',
-                        arguments: {
-                          'kota_asal': kota_asal,
-                          'kota_tujuan': kota_tujuan,
-                          'berat': berat,
-                          'jarakAsal': jarakAsal,
-                          'jarakTujuan': jarakTujuan,
-                          'layanan': layanan,
-                          'per_km': per_km,
-                          'ekspedisi' : ekspedisi,
-                          'listLayananPerkm1' : listLayananPerKm1,
-                          'listLayananPerkm2' : listLayananPerKm2,
-                        },
-                      );
+                      Future<void> navigateWithDelay() async {
+  await Future.delayed(Duration(seconds: 3), () {
+    Navigator.pushNamed(
+      context,
+      '/detail',
+      arguments: {
+        'kota_asal': kota_asal,
+        'kota_tujuan': kota_tujuan,
+        'berat': berat,
+        'jarakAsal': jarakAsal,
+        'jarakTujuan': jarakTujuan,
+        'layanan': layanan,
+        'per_km': per_km,
+        'ekspedisi' : ekspedisi,
+        'listLayananPerkm1' : listLayananPerKm1,
+        'listLayananPerkm2' : listLayananPerKm2,
+      },
+    );
+  });
+}
+navigateWithDelay();
                     },
                     child: const Text('CEK'),
                   ),
