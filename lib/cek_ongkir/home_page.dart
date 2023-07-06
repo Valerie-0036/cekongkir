@@ -444,7 +444,7 @@ void calculateDistance() async {
                       // validasi
                       if (kota_asal == null ||
                           kota_tujuan == null ||
-                          berat == null 
+                          berat == null || selectedKurir.length == 0
                           ) {
                         final snackBar =
                             SnackBar(content: const Text("Isi bidang yang masih kosong"));
