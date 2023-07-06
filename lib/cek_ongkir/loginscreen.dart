@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
         // Set the username in the userProvider
         // Proceed with navigation
-        Navigator.pushReplacementNamed(context, '/detail');
+        Navigator.pushReplacementNamed(context, '/homebar');
         print('User $username logged in at ${DateTime.now()}');
         print('Login successful');
       }
@@ -155,7 +155,7 @@ String hashPassword(String password) {
                             child: ElevatedButton(
                             onPressed: () {
                               login(context);
-                              Navigator.pushNamed(context, '/');
+                              // Navigator.pushNamed(context, '/homebar');
                               },
                               child: Text(
                                 'Login',

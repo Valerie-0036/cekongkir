@@ -44,24 +44,6 @@ class _HomePageState extends State<HomePage> {
   CollectionReference ekspedisiCollection =
       FirebaseFirestore.instance.collection('ekspedisi');
 
-  // void loadData(CollectionReference ekspedisiCollection) async {
-  //   try {
-  //     // final QuerySnapshot<Map<String, dynamic>> ekpedisiQuery = 
-  //     // await 
-  //     ekspedisiCollection.get().then((QuerySnapshot querySnapshot) {
-  //       querySnapshot.docs.forEach((doc) {
-  //           FirebaseFirestore.instance
-  //             .document(doc.id)
-  //             .collection("jobPost")
-  //             .get()
-  //             .then(...);
-  //       });
-  //   });
-  //   } catch (e) {
-  //       print('Terjadi kesalahan: $e');
-  //     }
-  // }
-
 void calculateDistance() async {
   // Cek apakah data provinsi asal dan tujuan sudah dipilih
   if (kota_asal != null && kota_tujuan != null) {

@@ -18,7 +18,9 @@ class Daftar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(),
+        leading: BackButton(
+          onPressed: () =>    Navigator.pushNamed(context, '/homebar'),
+        ),
         title: const Text("Daftar Ekspedisi"),
         backgroundColor: const Color.fromARGB(255, 255, 23, 68),
       ),

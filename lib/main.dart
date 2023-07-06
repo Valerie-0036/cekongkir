@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         '/detail1': (context) => DetailPage1(),
         '/daftar': (context) => Daftar(),
       },
-      initialRoute: '/homebar',
+      initialRoute: '/login',
     );
   }
 }
