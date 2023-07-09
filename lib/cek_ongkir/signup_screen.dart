@@ -173,7 +173,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                              onPressed: signUp, // Panggil method registerUser saat tombol ditekan
+                              onPressed: signUp,
+                              // Panggil method registerUser saat tombol ditekan
                               child: Text(
                                 'Create Account',
                                 style: TextStyle(color: Colors.white),
