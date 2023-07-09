@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,6 +15,13 @@ class MyApp extends StatelessWidget {
 }
 
 class Others extends StatelessWidget {
+
+  void _signOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacementNamed(context, '/login');
+    print('User telah keluar');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,7 +108,7 @@ class Others extends StatelessWidget {
                   // ), 
                   ElevatedButton(
                       onPressed: (){
-                        
+                        _signOut(context);
                       },
                       child: Text('Log Out'),
                       style: ElevatedButton.styleFrom(

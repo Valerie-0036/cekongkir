@@ -169,10 +169,7 @@ String hashPassword(String password) {
                             ),
                           ),
                           SizedBox(height: 20.0),
-                          Text(
-                            'or',
-                            style: TextStyle(fontSize: 16.0),
-                          ),
+                          
                           SizedBox(height: 20.0),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
