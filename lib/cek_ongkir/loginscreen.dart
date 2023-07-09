@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/widgets.dart';
@@ -26,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final password = hashPassword(_passwordController.text);
 
   if (email.isEmpty || password.isEmpty) {
-    print('Please fill in all fields');
+    showAlertDialog(context, 'Empty Fields', 'Please fill in all fields and try again.');
     return;
   }
 
@@ -55,7 +56,8 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     }
   } catch (error) {
-    print('Error logging in: $error');
+    showAlertDialog(context, 'Error Logging In', 'Failed to log in. Please check your credentials and try again.');
+      print('Error logging in: $error');
     // Handle error
   }
 }
@@ -211,6 +213,26 @@ String hashPassword(String password) {
           ),
         ),
       ),
+    );
+  }
+  
+  void showAlertDialog(BuildContext context, String title, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
 
+import 'package:fluttertoast/fluttertoast.dart';
+
 void main() {
   runApp(MaterialApp(
     home: SignUpScreen(),
@@ -31,7 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final confirmPassword = _confirmPasswordController.text;
 
     if (username.isEmpty || email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
-    print('Please fill in all fields');
+    showAlertDialog(context, 'Empty Fields', 'Please fill in all fields and try again.');
     // Display error message or take appropriate action for empty fields
     return;
     }
@@ -68,7 +70,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         print('Registration successful');
       }
     } catch (error) {
-      print('Error signing up: $error');
+     showAlertDialog(context, 'Error Register Account', 'Failed to Register Account. Please check your credentials and try again.');
+      print('Error logging in: $error');
       // Display error message or take appropriate action for the error
     }
   }
@@ -196,6 +199,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ),
       ),
+    );
+  }
+  
+  void showAlertDialog(BuildContext context, String title, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
